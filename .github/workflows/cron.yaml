@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: Regenerate files
         run: |
-          curl --request POST \
+          curl --request GET \
           --url 'https://vercel.com/fpinatti/resourcery/6yuLnLn5bmr4mmKs1V1RY4Ahsh6t'

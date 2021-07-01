@@ -3,7 +3,7 @@
 }
 html, body {
 	height: 100%;
-	background-color: var(--bs-light);
+	background-color: var(--bs-dark);
 }
 
 .userName {
@@ -35,17 +35,17 @@ img {
 }
 .greetings {
 	width: 100%;
-	background-color: var(--bs-white);
+	background-color: var(--bs-light);
 }
 .posts {
-	background-color: var(--bs-white);
+	background-color: var(--bs-light);
 	width: calc(80% - var(--box-margin) * 2);
 	resize: horizontal;
     overflow: auto;
 }
 
 .calendar {
-	background-color: var(--bs-white);
+	background-color: var(--bs-light);
 	width: calc(20% - var(--box-margin) * 2);
 }
 
