@@ -35,7 +35,7 @@ const saveJson = () => {
 	console.log('saving feed...')
 	let shuffleData = shuffledArr(data)
 	const jsonString = JSON.stringify(shuffleData, null, 4);
-	fs.writeFileSync('./feed.json', jsonString)
+	fs.writeFileSync('./public/feed.json', jsonString)
 }
 
 const shuffledArr = (array) => {
