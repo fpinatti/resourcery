@@ -1,0 +1,19 @@
+{
+  "name": "fetch",
+  "version": "1.0.0",
+  "description": "fetch rss from providers",
+  "main": "fetchRss.js",
+  "scripts": {
+    "app": "node fetchRss",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "xml2js": "^0.4.23"
+  }
+}

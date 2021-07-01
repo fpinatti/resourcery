@@ -1,0 +1,189 @@
+<!doctype html>
+<html
+	class="no-js"
+	lang=""
+>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<meta
+		name="description"
+		content=""
+	>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1"
+	>
+
+	<meta
+		property="og:title"
+		content=""
+	>
+	<meta
+		property="og:type"
+		content=""
+	>
+	<meta
+		property="og:url"
+		content=""
+	>
+	<meta
+		property="og:image"
+		content=""
+	>
+
+	<link
+		rel="manifest"
+		href="manifest.json"
+	>
+	<link
+		rel="apple-touch-icon"
+		href="icon.png"
+	>
+	<!-- Place favicon.ico in the root directory -->
+
+	<link
+		rel="stylesheet"
+		href="css/normalize.css"
+	>
+	<link
+		rel="stylesheet"
+		href="css/bootstrap.min.css"
+	>
+	<link
+		rel="stylesheet"
+		href="css/main.css"
+	>
+	<link
+		rel="stylesheet"
+		href="css/resourceria.css"
+	>
+	<meta
+		name="theme-color"
+		content="#fafafa"
+	>
+</head>
+
+<body>
+
+	<div
+		class="modal"
+		id="contentModal"
+		tabindex="-1"
+	>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button
+						type="button"
+						class="btn-close"
+						data-bs-dismiss="modal"
+						aria-label="Close"
+					></button>
+				</div>
+				<div class="modal-body">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<img
+			src="img/logo.svg"
+			class="top-logo"
+		/>
+	</header>
+	<main id="content">
+		<section class="greetings shadow">
+			<p class="fs-2"><span class="greet"></span>
+				<input
+					class="userName"
+					type="text"
+					value="<your name here>"
+				/>
+			</p>
+			Weather today in <span class="city-name"></span> is <span class="city-temp"></span>º,
+			<span class="city-sky"></span>.
+		</section>
+		<section class="posts shadow">
+			<h2>Resources</h2>
+			<ul class="posts__list">
+
+			</ul>
+		</section>
+		<section class="calendar shadow">
+			calendar
+			<iframe
+				src=""
+				style="border:solid 1px #777"
+				width="100%"
+				height="600"
+				frameborder="0"
+				scrolling="no"
+				class="calendar-frame"
+			></iframe>
+			<p>
+				<a
+					class="btn btn-primary"
+					data-bs-toggle="collapse"
+					href="#calendar-url"
+					role="button"
+					aria-expanded="false"
+					aria-controls="calendar-url"
+				>
+					your calendar url
+				</a>
+			</p>
+			<div
+				class="collapse"
+				id="calendar-url"
+			>
+				<div class="card card-body">
+					<input
+					class="userCalendar"
+					type="text"
+					value=""
+				/>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- <script src="https://apis.google.com/js/api.js"></script> -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/main.js"></script>
+	<template class="post-template">
+		<li class="posts__list-item shadow">
+			<!-- <img src="" class="post__thumb" /> -->
+			<div class="mb-3">
+				<span
+					class="post__provider"
+					data-provider=""
+				></span>
+			</div>
+			<span class="post__title fs-6 fw-bold">title</span>
+			<span class="post__description fs-6">description</span>
+			<button
+				type="button"
+				class="btn btn-primary btn-modal"
+				data-idx="0"
+				data-bs-toggle="modal"
+				data-bs-target="#contentModal"
+			>
+				Read more
+			</button>
+			<br />
+			<small>
+				<a
+					href=""
+					target="_self"
+					class="post__link"
+				>original post</a>
+			</small>
+		</li>
+	</template>
+</body>
+
+</html>
