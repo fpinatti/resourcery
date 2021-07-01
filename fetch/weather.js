@@ -30,7 +30,7 @@ const fetchWeather = async () => {
 
 const checkJsonAge = async () => {
 	try {
-		const stats = fs.statSync(`./weather-${city}.json`)
+		const stats = fs.statSync(`./public/weather-${city}.json`)
 		const seconds = (new Date().getTime() - new Date(stats.mtime).getTime()) / 1000
 		return seconds
 	} catch (err) {
@@ -40,7 +40,7 @@ const checkJsonAge = async () => {
 
 const saveJson = (data) => {
 	console.log('saving weather data...')
-	fs.writeFileSync(`./weather-${city}.json`, JSON.stringify(data))
+	fs.writeFileSync(`./public/weather-${city}.json`, JSON.stringify(data))
 }
 
 const initApp = async () => {
