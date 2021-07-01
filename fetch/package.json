@@ -4,7 +4,9 @@
   "description": "fetch rss from providers",
   "main": "fetchRss.js",
   "scripts": {
-    "app": "node fetchRss",
+    "weather": "node weather",
+	"feed": "node fetchRss",
+	"all": "node weather && node fetchRss",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {

@@ -1,0 +1,12 @@
+name: 15-minute-cron
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Regenerate files
+        run: |
+          curl --request POST \
+          --url 'https://vercel.com/fpinatti/resourcery/6yuLnLn5bmr4mmKs1V1RY4Ahsh6t'

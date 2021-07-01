@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const fetchResources = () => {
-		const rssFetch = new Request('./fetch/feed.json')
+		const rssFetch = new Request('https://resourcery.vercel.app/feed.json')
 		//const headers = new Headers()
 		const options = {
 			method: 'GET'
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const fetchWeather = () => {
-		const endpointWeather = new Request(`./fetch/weather-${city}.json`)
+		const endpointWeather = new Request(`https://resourcery.vercel.app/weather-${city}.json`)
 		const options = {
 			method: 'GET'
 		}
