@@ -2,7 +2,8 @@ const fetch = require('node-fetch')
 const util = require('util')
 const fs = require('fs')
 const city = 'campinas'
-const apiKey = 'a599aca85f065f4f091e81e90cab0b78'
+const dotenv = require('dotenv')
+const apiKey = dotenv.config().parsed.WEATHER_APIKEY
 const timeToUpdate = 30 //in minutes
 
 const fetchWeather = async () => {
