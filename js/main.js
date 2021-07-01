@@ -116,55 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	}
 
-	// const updateSigninStatus = (isSignedIn) => {
-	// 	console.log('uodate sign in status')
-	// }
-
-	// const initClient = () => {
-	// 	console.log('init client')
-
-	// 	gapi.client.init({
-	// 		apiKey: 'AIzaSyCg4bkUSxBl9CUo0pPsqHtO9Px1_gy-Jx4',
-	// 		discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
-	// 		clientId: '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
-	// 		scope: 'profile'
-	// 	}).then(function () {
-	// 		// Listen for sign-in state changes.
-	// 		//gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-	// 		// Handle the initial sign-in state.
-	// 		//updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-
-	// 		// authorizeButton.onclick = handleAuthClick;
-	// 		// signoutButton.onclick = handleSignoutClick;
-	// 	});
-	// 	// // 2. Initialize the JavaScript client library.
-	// 	// gapi.client.init({
-	// 	// 	'apiKey': 'AIzaSyCg4bkUSxBl9CUo0pPsqHtO9Px1_gy-Jx4',
-	// 	// 	// clientId and scope are optional if auth is not required.
-	// 	// 	'clientId': '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
-	// 	// 	'scope': 'profile',
-	// 	// }).then(function () {
-	// 	// 	// 3. Initialize and make the API request.
-	// 	// 	return gapi.client.request({
-	// 	// 		'path': 'https://people.googleapis.com/v1/people/me?requestMask.includeField=person.names',
-	// 	// 	})
-	// 	// }).then(function (response) {
-	// 	// 	console.log(response.result);
-	// 	// }, function (reason) {
-	// 	// 	console.log('Error: ' + reason.result.error.message);
-	// 	// });
-	// };
-
-	// const initGAPI = () => {
-	// 	gapi.load('client:auth2', initClient);
-	// }
-
 	fetchResources()
 	fetchWeather()
 	setGreetings()
 	initModal()
 	addListeners()
 	getUserPrefs()
-	//initGAPI()
 })
