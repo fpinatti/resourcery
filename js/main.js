@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	let fullData
 	const modalBody = document.querySelector('.modal-body')
-	const city = 'campinas'
+	let city = ''
 
 	const buildPostsList = (postsList) => {
 		const listWrapper = document.querySelector('.posts__list')
@@ -33,6 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			.then(response => response.json())
 			.then(data => {
 				buildPostsList(data)
+			})
+			.catch(console.error);
+	}
+
+	const getLocation = () => {
+		const location = new Request('https://geolocation-db.com/json/59e89620-db25-11eb-ad48-73c00c9b92a3')
+		//const headers = new Headers()
+		const options = {
+			method: 'GET'
+		}
+		return fetch(location, options)
+			.then(response => response.json())
+			.then(data => {
+				city = data.city.toLowerCase()
+				//buildPostsList(data)
 			})
 			.catch(console.error);
 	}
@@ -117,8 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	fetchResources()
-	fetchWeather()
-	setGreetings()
+	getLocation()
+		.then(() => {
+			fetchWeather()
+			setGreetings()
+		})
 	initModal()
 	addListeners()
 	getUserPrefs()
