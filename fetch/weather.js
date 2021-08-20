@@ -3,7 +3,7 @@ const util = require('util')
 const fs = require('fs')
 const city = 'campinas'
 const dotenv = require('dotenv')
-const apiKey = dotenv.config().parsed.WEATHER_APIKEY
+const apiKey = process.env.WEATHER_APIKEY
 const timeToUpdate = 30 //in minutes
 
 const fetchWeather = async () => {
