@@ -1,17 +1,19 @@
 :root {
 	--box-margin: 10px;
-	--provider-1-primary: green;
+	--provider-1-primary: #097e09;
 	--provider-2-primary: #9a9a0a;
-	--provider-3-primary: teal;
-	--provider-4-primary:darkgoldenrod;
-	--provider-5-primary:palevioletred;
-	--provider-6-primary:fuchsia;
+	--provider-3-primary: #007474;
+	--provider-4-primary:#0851b1;
+	--provider-5-primary:#d10046;
+	--provider-6-primary:#04a4aa;
 }
 html, body {
 	height: 100%;
 	background-color: var(--bs-dark);
 }
-
+a {
+	color: var(--bs-gray);
+}
 .userName {
 	border: none;
 }
@@ -66,25 +68,20 @@ img {
 	border-radius: 8px;
     margin: 6px;
     padding: 15px;
+	display: flex;
+    flex-wrap: wrap;
+	flex-direction: column;
+}
+.post__content {
+	flex-grow: 2;
 }
 
 .post__thumb {
 	max-width: 100%;
 }
-
-.post__link {
-	/* background-color: red;
-    display: inline-block;
-    color: #fff;
-    border-radius: 6px;
-    padding: 4px;
-    margin-top: 7px; */
-}
 .post__provider {
-	border-radius: 8px;
-	padding: 4px 10px;
 	font-size: 12px;
-	background-color: blueviolet;
+	color: var(--primary-color);
 }
 .post__description {
 	display: block;
@@ -97,6 +94,17 @@ img {
 }
 .btn-primary {
 	background-color: var(--primary-color);
+}
+.btn-primary:hover,
+.btn-check:active+.btn-primary,
+.btn-check:checked+.btn-primary,
+.btn-primary.active,
+.btn-primary:active,
+.show>.btn-primary.dropdown-toggle,
+.btn-check:focus+.btn-primary,
+.btn-primary:focus {
+	filter: brightness(.9);
+    background-color: var(--primary-color);
 }
 
 .posts__list-item[data-provider="Smashing Magazine"] {
@@ -117,8 +125,3 @@ img {
 .posts__list-item[data-provider="CSS Weekly"] {
 	--primary-color: var(--provider-6-primary);
 }
-
-
-/* section {
-
-} */

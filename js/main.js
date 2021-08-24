@@ -14,10 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			const clonedItem = rowTemplate.content.cloneNode(true)
 			clonedItem.querySelector('.post__title').innerText = item.title
-			console.log(item)
 			clonedItem.querySelector('.post__provider').innerText = item.providerTitle
-			clonedItem.querySelector('.post__provider').setAttribute('href', item.providerUrl)
-			clonedItem.querySelector('.posts__list-item').setAttribute('data-provider', item.provider)
+			clonedItem.querySelector('.post__provider').setAttribute('href', item.providerURL)
+			clonedItem.querySelector('.posts__list-item').setAttribute('data-provider', item.providerTitle)
 			clonedItem.querySelector('.post__description').innerHTML = `${String(item.description).substring(0, 130)}...`
 			clonedItem.querySelector('.post__link').setAttribute('href', item.link)
 			clonedItem.querySelector('.btn-modal').setAttribute('data-idx', idx)
