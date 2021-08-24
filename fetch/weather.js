@@ -9,6 +9,7 @@ const timeToUpdate = 30 //in minutes
 const fetchWeather = async () => {
 	console.log('fetching weather...')
 	let jsonAge = await checkJsonAge()
+	console.log(jsonAge, timeToUpdate, 60 * timeToUpdate);
 	if (jsonAge > 60 * timeToUpdate || !jsonAge) {
 		try {
 			const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`

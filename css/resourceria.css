@@ -1,5 +1,11 @@
 :root {
 	--box-margin: 10px;
+	--provider-1-primary: green;
+	--provider-2-primary: #9a9a0a;
+	--provider-3-primary: teal;
+	--provider-4-primary:darkgoldenrod;
+	--provider-5-primary:palevioletred;
+	--provider-6-primary:fuchsia;
 }
 html, body {
 	height: 100%;
@@ -90,26 +96,26 @@ img {
 	margin: 10px 0;
 }
 .btn-primary {
-	/* background-color: aqua; */
+	background-color: var(--primary-color);
 }
 
-.post__provider[data-provider="Smashing Magazine"] {
-	background-color: green;
+.posts__list-item[data-provider="Smashing Magazine"] {
+	--primary-color: var(--provider-1-primary);
 }
-.post__provider[data-provider="CSS Tricks"] {
-	background-color: yellow;
+.posts__list-item[data-provider="CSS Tricks"] {
+	--primary-color: var(--provider-2-primary);
 }
-.post__provider[data-provider="Sitepoint"] {
-	background-color: teal;
+.posts__list-item[data-provider="Sitepoint"] {
+	--primary-color: var(--provider-3-primary);
 }
-.post__provider[data-provider="Codrops"] {
-	background-color:darkgoldenrod;
+.posts__list-item[data-provider="Codrops"] {
+	--primary-color: var(--provider-4-primary);
 }
-.post__provider[data-provider="Dev.to"] {
-	background-color:palevioletred;
+.posts__list-item[data-provider="Dev.to"] {
+	--primary-color: var(--provider-5-primary);
 }
-.post__provider[data-provider="CSS Weekly"] {
-	background-color:fuchsia;
+.posts__list-item[data-provider="CSS Weekly"] {
+	--primary-color: var(--provider-6-primary);
 }
 
 
