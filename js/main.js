@@ -129,9 +129,39 @@ document.addEventListener('DOMContentLoaded', () => {
 			const calendar = document.querySelector('.calendar-frame')
 			calendar.setAttribute('src', localStorage.getItem('rscry-uc'))
 		}
-
 	}
 
+	const getCalendar = () => {
+
+		//return calendar list
+		// need scope https://www.googleapis.com/auth/calendar.readonly
+		//GET https://www.googleapis.com/calendar/v3/users/me/calendarList
+
+		// get calendar with id
+		//GET https://www.googleapis.com/calendar/v3/calendars/calendarId
+	}
+
+	//https://developers.google.com/identity/sign-in/web/sign-in
+	const getBasicProfile = (googleUser) => {
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
+
+	const handleCredentialResponse = () => {
+		console.log('111');
+	};
+	window.onload = function () {
+	  google.accounts.id.initialize({
+		client_id: '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
+		callback: handleCredentialResponse
+	  });
+	  //google.accounts.id.prompt();
+	}
+
+	//https://developer.chrome.com/docs/apps/app_identity/
 	fetchResources()
 	getLocation()
 		.then(() => {
@@ -141,4 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	initModal()
 	addListeners()
 	getUserPrefs()
+
+	// getCalendar()
 })
