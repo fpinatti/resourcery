@@ -14,7 +14,7 @@ const fetchWeather = async () => {
 	try {
 		const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
 		const options = {
-			method: 'GET'
+			method: 'GET'1
 		}
 
 		const response = await fetch(endpoint, options)
