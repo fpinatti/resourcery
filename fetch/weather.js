@@ -1,18 +1,19 @@
 const fetch = require('node-fetch')
-const util = require('util')
 const fs = require('fs')
-const city = 'campinas'
 const dotenv = require('dotenv')
-const apiKey = process.env.WEATHER_APIKEY
-const timeToUpdate = 30 //in minutes
+const { log } = require('../utils/logger')
+
+const API_KEY = process.env.WEATHER_APIKEY
+const CITY = 'campinas'
+const TIME_TO_UPDATE = 30 //in minutes
 
 const fetchWeather = async () => {
-	console.log('fetching weather...')
+	log('Fetching weather...')
 	// let jsonAge = await checkJsonAge()
-	// console.log(jsonAge, timeToUpdate, 60 * timeToUpdate);
+	// log(jsonAge, timeToUpdate, 60 * timeToUpdate);
 	// if (jsonAge > 60 * timeToUpdate || !jsonAge) {
 	try {
-		const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+		const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${CITY}&units=metric&appid=${API_KEY}`
 		const options = {
 			method: 'GET'
 		}
@@ -22,10 +23,10 @@ const fetchWeather = async () => {
 		saveJson(responseText)
 
 	} catch (err) {
-		console.log(err)
+		log('Error fetching the weather', err)
 	}
 	// } else {
-	// 	console.log('Weather data is updated, no need to fetch again')
+	// 	log('Weather data is updated, no need to fetch again')
 	// }
 }
 
@@ -35,13 +36,13 @@ const fetchWeather = async () => {
 // 		const seconds = (new Date().getTime() - new Date(stats.mtime).getTime()) / 1000
 // 		return seconds
 // 	} catch (err) {
-// 		console.log(err)
+// 		log('Error checking json age', err)
 // 	}
 // }
 
 const saveJson = (data) => {
-	console.log('saving weather data...')
-	fs.writeFileSync(`./public/weather-${city}.json`, JSON.stringify(data))
+	log('Saving weather data...')
+	fs.writeFileSync(`./public/weather-${CITY}.json`, JSON.stringify(data))
 }
 
 const initApp = async () => {
