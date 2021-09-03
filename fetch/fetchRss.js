@@ -2,11 +2,13 @@ const xml2js = require('xml2js')
 const fetch = require('node-fetch')
 const util = require('util')
 const parseString = require('xml2js').parseString
-let data = []
 const fs = require('fs')
+const { log } = require('../utils/logger')
+
+let data = []
 
 const fetchResources = async (url, info) => {
-	console.log('fetching...')
+	log('Fetching...')
 	try {
 		const rssFetch = url
 		const options = {
@@ -20,7 +22,7 @@ const fetchResources = async (url, info) => {
 			appendLoadedData(convertedJson, info)
 		});
 	} catch (err) {
-		console.log(err)
+		log('Error fetching the resource', err)
 	}
 }
 
@@ -33,7 +35,7 @@ const appendLoadedData = async (jsonData, info) => {
 }
 
 const saveJson = () => {
-	console.log('saving feed...')
+	log('Saving feed...')
 	let shuffleData = shuffledArr(data)
 	const jsonString = JSON.stringify(shuffleData, null, 4);
 	fs.writeFileSync('./public/feed.json', jsonString)
