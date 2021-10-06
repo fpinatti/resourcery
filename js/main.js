@@ -64,9 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				const cityName = document.querySelector('.city-name')
 				const cityTemp = document.querySelector('.city-temp')
 				const citySky = document.querySelector('.city-sky')
+				const weatherIcon = document.querySelector('.icon-weather')
 				cityName.innerText = city
 				cityTemp.innerText = Math.round(data.main.feels_like)
 				citySky.innerText = data.weather[0].description
+				weatherIcon.setAttribute('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
 			})
 			.catch(console.error)
 	}
