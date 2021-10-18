@@ -1,0 +1,1 @@
+{"mappings":"AAAAA,SAASC,iBAAiB,oBAAkB","sources":["src/js/settings.js"],"sourcesContent":["document.addEventListener('DOMContentLoaded', () => {\n\n})\n"],"names":["document","addEventListener"],"version":3,"file":"settings.243a1eb1.js.map","sourceRoot":"../"}
