@@ -13,7 +13,7 @@
     "start": "parcel index.html",
     "build": "parcel build src/index.html src/settings.html src/js/background.js --no-content-hash && cp -R ./src/manifest.json ./dist",
     "lint": "eslint src/js/**",
-	"lint:fix": "eslint src/js/** --fix"
+    "lint:fix": "eslint src/js/** --fix"
   },
   "dependencies": {
     "firebase": "^9.0.2"
