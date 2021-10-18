@@ -129,11 +129,10 @@ const defaultCallback = () => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // TODO: Improve If logic
   if (request.message === 'get_auth_token') getAuthToken()
-  if (request.message === 'get_profile') getUserProfile()
-  if (request.message === 'get_user_information') getUserInformation()
-  if (request.message === 'get_contacts') getUserContacts()
-  if (request.message === 'get_calendar_list') getCalendarList()
-  if (request.message === 'get_calendar_by_id') getCalendarEvents()
-
-  defaultCallback()
+  else if (request.message === 'get_profile') getUserProfile()
+  else if (request.message === 'get_user_information') getUserInformation()
+  else if (request.message === 'get_contacts') getUserContacts()
+  else if (request.message === 'get_calendar_list') getCalendarList()
+  else if (request.message === 'get_calendar_by_id') getCalendarEvents()
+  else defaultCallback()
 })
