@@ -1,19 +1,5 @@
 const API_KEY = "AIzaSyCACn68SfWwozQbzOXYPqCskkN-XKlgNug";
 
-let user_signed_in = false;
-
-chrome.identity.onSignInChanged.addListener(function (account_id, signedIn) {
-	if (signedIn) {
-		user_signed_in = true;
-	} else {
-		user_signed_in = false;
-	}
-
-	alert(
-		`User sign-In status: ${user_signed_in ? "Signed In" : "Signed Out"}`
-	);
-});
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 	if (request.message === "get_auth_token") {
 		chrome.identity.getAuthToken({ interactive: true }, function (token) {
