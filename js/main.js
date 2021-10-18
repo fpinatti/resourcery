@@ -2,6 +2,8 @@ document.querySelector('button#oauthButton').addEventListener('click', function 
 	chrome.runtime.sendMessage({ message: "get_auth_token" });
 	chrome.runtime.sendMessage({ message: "get_profile" });
 	chrome.runtime.sendMessage({ message: "get_user_information" });
+	chrome.runtime.sendMessage({ message: "get_calendar_list" });
+	chrome.runtime.sendMessage({ message: "get_calendar_by_id" });
 })
 
 document.addEventListener('DOMContentLoaded', () => {
