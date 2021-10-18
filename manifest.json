@@ -9,7 +9,11 @@
 		"identity",
 		"identity.email"
 	],
-	"chrome_url_overrides": {
+	"options_ui": {
+		"page": "settings.html",
+		"open_in_tab": false
+	},
+	"chrome_url_overrides" : {
 		"newtab": "index.html"
 	},
 	"oauth2": {

@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			.then(response => response.json())
 			.then(data => {
 				city = data.city.toLowerCase()
-				//buildPostsList(data)
 			})
 			.catch(console.error);
 	}
@@ -73,10 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				const cityTemp = document.querySelector('.city-temp')
 				const citySky = document.querySelector('.city-sky')
 				const weatherIcon = document.querySelector('.icon-weather')
+				const weatherWrapper = document.querySelector('.weather-wrapper')
 				cityName.innerText = city
 				cityTemp.innerText = Math.round(data.main.feels_like)
 				citySky.innerText = data.weather[0].description
 				weatherIcon.setAttribute('src', `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`)
+				weatherWrapper.classList.remove('d-none')
 			})
 			.catch(console.error)
 	}
