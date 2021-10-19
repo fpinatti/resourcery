@@ -19,6 +19,9 @@ const fetchResources = async (url, info) => {
     const responseText = await response.text()
 
     parseString(responseText, function (err, convertedJson) {
+      if (err) {
+        console.log(err);
+      }
       appendLoadedData(convertedJson, info)
     });
   } catch (err) {
@@ -91,7 +94,7 @@ const initApp = async () => {
       provider_url: 'https://css-weekly.com/'
     }
   )
-  await saveJson()
+  saveJson()
 }
 
 initApp()
