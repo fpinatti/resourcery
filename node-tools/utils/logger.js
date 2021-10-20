@@ -1,4 +1,4 @@
-/* global warn */
+/* global */
 const util = require('util')
 
 const getDateAndTime = () => {
@@ -28,7 +28,7 @@ const log = (message, params) => {
     const dateAndTime = getDateAndTime()
     console.log(`[INFO] ${dateAndTime} ${message} ${params ? util.inspect(params, { compact: true, depth: 5 }) : ''}`)
   } catch (err) {
-    warn(err)
+    console.warn(err)
   }
 }
 
