@@ -83,12 +83,6 @@ const getCalendarList = () => {
 
 const getCalendarEvents = () => {
   chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    const startDayDate = new Date()
-    const endDayDate = new Date()
-
-    startDayDate.setUTCHours(0, 0, 0, 0)
-    endDayDate.setUTCHours(23, 59, 59, 999)
-
     const dateToISOStart = getISODate('start')
     const dateToISOEnd = getISODate('end')
 
@@ -127,8 +121,8 @@ const defaultCallback = () => {
 }
 
 const sendResponse = (userMessage, objData) => {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    const activeTab = tabs[0];
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const activeTab = tabs[0]
     chrome.tabs.sendMessage(activeTab.id,
       {
         action: 'chrome-message',

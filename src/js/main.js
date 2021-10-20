@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         break
       case 'user_info': {
         const nameField = document.querySelector('.userName')
-        nameField.innerText = objData.names[0].displayName;
+        nameField.innerText = objData.names[0].displayName
         break
       }
     }
