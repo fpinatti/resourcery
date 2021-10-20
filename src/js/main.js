@@ -1,13 +1,4 @@
 /* global chrome, google */
-
-document.querySelector('button#oauthButton').addEventListener('click', function () {
-  chrome.runtime.sendMessage({ message: 'get_auth_token' })
-  chrome.runtime.sendMessage({ message: 'get_profile' })
-  chrome.runtime.sendMessage({ message: 'get_user_information' })
-  chrome.runtime.sendMessage({ message: 'get_calendar_list' })
-  chrome.runtime.sendMessage({ message: 'get_calendar_by_id' })
-})
-
 document.addEventListener('DOMContentLoaded', () => {
   let fullData
   const modalBody = document.querySelector('.modal-body')
@@ -122,10 +113,42 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const addListeners = () => {
-    const nameField = document.querySelector('.userName')
-    // const calendarField = document.querySelector('.userCalendar')
-    nameField.addEventListener('change', onNameChange)
     // calendarField.addEventListener('change', onCalendarChange)
+    document.querySelector('button#oauthButton').addEventListener('click', function () {
+      chrome.runtime.sendMessage({
+        message: 'get_auth_token'
+      })
+      chrome.runtime.sendMessage({
+        message: 'get_profile'
+      })
+      chrome.runtime.sendMessage({
+        message: 'get_user_information'
+      })
+      chrome.runtime.sendMessage({
+        message: 'get_calendar_list'
+      })
+      chrome.runtime.sendMessage({
+        message: 'get_calendar_by_id'
+      })
+    })
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+      if (request.action === 'chrome-message') {
+        onGetChromeMessage(request.message, request.data)
+      }
+    })
+  }
+
+  const onGetChromeMessage = (message, objData) => {
+    switch (message) {
+      case 'user_profile':
+        break
+      case 'user_info': {
+        const nameField = document.querySelector('.userName')
+        nameField.innerText = objData.names[0].displayName;
+        break
+      }
+    }
+    console.log(message, objData)
   }
 
   const getUserPrefs = () => {

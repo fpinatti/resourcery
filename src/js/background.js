@@ -12,7 +12,7 @@ const getUserProfile = () => {
   chrome.identity.getProfileUserInfo(
     { accountStatus: 'ANY' },
     function (userInfo) {
-      console.log(userInfo)
+      sendResponse('user_profile', userInfo)
     }
   )
 }
@@ -28,7 +28,7 @@ const getUserInformation = () => {
 
     fetch(fetchUrl, fetchOptions)
       .then((res) => res.json())
-      .then((res) => console.log(res))
+      .then((res) => sendResponse('user_info', res))
   })
 }
 
@@ -56,7 +56,7 @@ const getUserContacts = () => {
 
           fetch(fetchPersonFieldsUrl, fetchOptions)
             .then((res) => res.json())
-            .then((res) => console.log(res))
+            .then((res) => sendResponse('user_contacts', res))
         }
       })
   })
@@ -76,7 +76,7 @@ const getCalendarList = () => {
     fetch(fetchUrl, fetchOptions)
       .then((response) => response.json())
       .then(function (data) {
-        console.log(data)
+        sendResponse('user_calendar_list', data)
       })
   })
 }
@@ -104,7 +104,7 @@ const getCalendarEvents = () => {
     fetch(fetchUrl, fetchOptions)
       .then((response) => response.json())
       .then(function (data) {
-        console.log(data)
+        sendResponse('user_calendar_events', data)
       })
   })
 }
@@ -124,6 +124,18 @@ const getISODate = (type) => {
 
 const defaultCallback = () => {
   console.log('Command not found!')
+}
+
+const sendResponse = (userMessage, objData) => {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    const activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id,
+      {
+        action: 'chrome-message',
+        message: userMessage,
+        data: objData
+      })
+  })
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
