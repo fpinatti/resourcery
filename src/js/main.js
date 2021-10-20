@@ -144,11 +144,28 @@ document.addEventListener('DOMContentLoaded', () => {
         break
       case 'user_info': {
         const nameField = document.querySelector('.userName')
-        nameField.innerText = objData.names[0].displayName
+        nameField.innerText = upperCaseNameFirstLetters(objData.names[0].displayName)
         break
       }
     }
     console.log(message, objData)
+  }
+
+  const upperCaseNameFirstLetters = (name) => {
+    try {
+      const splitStr = name.toLowerCase().split(' ')
+
+      for (let i = 0; i < splitStr.length; i++) {
+        if (splitStr[i].length > 1) {
+          splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1)
+        }
+      }
+
+      return splitStr.join(' ')
+    } catch (error) {
+      console.log(error)
+      return name
+    }
   }
 
   const getUserPrefs = () => {
