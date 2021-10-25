@@ -98,6 +98,10 @@ const getCalendarEvents = () => {
     fetch(fetchUrl, fetchOptions)
       .then((response) => response.json())
       .then(function (data) {
+        // TODO make this work as expected sorting the dates ASC
+        // data.sort((a, b) => {
+        //   return new Date(a.start).dateTime - new Date(b.start).dateTime
+        // })
         sendResponse('user_calendar_events', data)
       })
   })

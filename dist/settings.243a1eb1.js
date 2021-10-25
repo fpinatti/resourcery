@@ -1,2 +1,2 @@
-document.addEventListener("DOMContentLoaded",(()=>{}));
+document.addEventListener("DOMContentLoaded",(()=>{const e=document.querySelector(".role-picker"),t=document.querySelector("#liveToast"),o=new bootstrap.Toast(t),n=e=>{const t=e.target.value;t&&r({role:t})},r=e=>{chrome.storage.sync.set(e,(function(){o.show()}))};e.addEventListener("change",n),chrome.storage.sync.get({role:""},(function(t){e.value=t.role}))}));
 //# sourceMappingURL=settings.243a1eb1.js.map

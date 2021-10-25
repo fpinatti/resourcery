@@ -125,3 +125,20 @@ img {
 .posts__list-item[data-provider="CSS Weekly"] {
 	--primary-color: var(--provider-6-primary);
 }
+
+.attending,
+.notAttending,
+.notConfirmed {
+  display: none;
+  vertical-align: super;
+}
+/* TODO: fix those classes to display attend icons */
+/* .calendar-event-item.statusConfirmed .notAttending {
+  display: block;
+} */
+/* .calendar-event-item.statusConfirmed .notConfirmed {
+  display: block;
+} */
+.calendar-event-item.statusConfirmed .attending {
+  display: inline-block;
+}

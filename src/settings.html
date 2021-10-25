@@ -34,8 +34,21 @@
 </head>
 
 <body class="m-4">
+  <div class="mb-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body">
+        Saved successfuly
+      </div>
+    </div>
+  </div>
+
 	Which is your role/area of interest?
-	<div class="dropdown">
+  <select class="role-picker">
+    <option>Role/Area of interest</option>
+    <option value="fe">Frontend</option>
+    <option value="be">Backend</option>
+  </select>
+	<!-- <div class="dropdown">
 		<button
 			class="btn btn-secondary dropdown-toggle"
 			type="button"
@@ -54,7 +67,7 @@
 			</li>
 			<li><a class="dropdown-item" href="#">Backend Developer</a></li>
 		</ul>
-	</div>
+	</div> -->
 	<script src="js/settings.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
 </body>

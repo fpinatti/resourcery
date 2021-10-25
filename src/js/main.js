@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const fetchResources = () => {
+    console.log('>>>', userPrefs)
     const rssFetch = new Request('https://resourcery.vercel.app/feed.json')
     // const headers = new Headers()
     const options = {
@@ -104,14 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const onNameChange = (evt) => {
-    localStorage.setItem('rscry-un', evt.target.value)
-  }
-
-  const onCalendarChange = (evt) => {
-    localStorage.setItem('rscry-uc', evt.target.value)
-  }
-
   const addListeners = () => {
     // calendarField.addEventListener('change', onCalendarChange)
     document.querySelector('button#oauthButton').addEventListener('click', function () {
@@ -147,8 +140,61 @@ document.addEventListener('DOMContentLoaded', () => {
         nameField.innerText = upperCaseNameFirstLetters(objData.names[0].displayName)
         break
       }
+      case 'user_calendar_events': {
+        buildCalendarEvents(objData)
+        break
+      }
     }
-    console.log(message, objData)
+    // console.log(message, objData)
+  }
+
+  const buildCalendarEvents = (objData) => {
+    const calendarList = document.querySelector('.calendar-list')
+    const calendarEvent = document.querySelector('.calendar-event')
+    const etags = []
+
+    objData.items.forEach((event) => {
+      const eventStart = event.originalStartTime?.dateTime || event.start?.dateTime
+      if (event.summary && eventStart && !etags.includes(event.etag)) {
+        console.log(event)
+        etags.push(event.etag);
+        const clonedEvent = calendarEvent.content.cloneNode(true)
+        clonedEvent.querySelector('.event-summary').innerText = event.summary
+        if (event.hangoutLink) {
+          clonedEvent.querySelector('.event-hangout').setAttribute('href', event.hangoutLink)
+        } else {
+          clonedEvent.querySelector('.event-hangout').classList.add('d-none')
+        }
+        clonedEvent.querySelector('.event-start-time').innerText = getPrettyHourMinute(eventStart);
+        const eventEnd = event.end?.dateTime
+        clonedEvent.querySelector('.event-duration').innerText = `${getDateDiff(eventStart, eventEnd)}min`
+        if (event.status === 'confirmed') {
+          console.log('!!!', clonedEvent)
+          clonedEvent.querySelector('.calendar-event-item').classList.add('statusConfirmed');
+        }
+        calendarList.append(clonedEvent)
+      }
+    })
+  }
+
+  const getFormattedDate = (strDate) => {
+    return new Date(strDate);
+  }
+
+  const getPrettyHourMinute = (strDate) => {
+    const tmpDate = new Date(strDate);
+    let prettyTime = `${tmpDate.getHours()}h`
+    if (tmpDate.getMinutes()) {
+      prettyTime = `${prettyTime}${tmpDate.getMinutes()}m`
+    }
+    return prettyTime;
+  }
+
+  const getDateDiff = (eventStart, eventEnd) => {
+    const startDate = new Date(eventStart);
+    const endDate = new Date(eventEnd);
+    const diffDate = (endDate.getTime() - startDate.getTime()) / 60000
+    return diffDate
   }
 
   const upperCaseNameFirstLetters = (name) => {
@@ -169,18 +215,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const getUserPrefs = () => {
-    const userName = localStorage.getItem('rscry-un')
-    const userCalendar = localStorage.getItem('rscry-uc')
-    if (userName) {
-      const nameField = document.querySelector('.userName')
-      nameField.value = localStorage.getItem('rscry-un')
-    }
-    if (userCalendar) {
-      const calendarField = document.querySelector('.userCalendar')
-      calendarField.value = localStorage.getItem('rscry-uc')
-      const calendar = document.querySelector('.calendar-frame')
-      calendar.setAttribute('src', localStorage.getItem('rscry-uc'))
-    }
+    return chrome.storage.sync.get({
+      role: ''
+    }, function (items) {
+      return items
+    })
   }
 
   const getCalendar = () => {
@@ -214,6 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // https://developer.chrome.com/docs/apps/app_identity/
+  const userPrefs = getUserPrefs()
   fetchResources()
   getLocation()
     .then(() => {
@@ -222,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   initModal()
   addListeners()
-  getUserPrefs()
 
   // getCalendar()
 })

@@ -87,16 +87,8 @@
 				<small class="fs-4">📆</small>
 				My day:
 			</h1>
-			<span>
-				<p class="fs-3 d-inline text-danger">8h</p>
-				<p class="fs-6 ms-1 d-inline text-danger">(30min)</p>
-				<p class="fs-6">Daily Meeting<button class="btn btn-info ms-2 mt-0 mb-0">💬</button></p>
-			</span>
-			<span>
-				<p class="fs-3 d-inline text-danger">11h30m</p>
-				<p class="fs-6 ms-1 d-inline text-danger">(1h)</p>
-				<p class="fs-6">Lunch<button class="btn btn-info ms-2 mt-0 mb-0">💬</button></p>
-			</span>
+      <ul class="calendar-list p-0">
+      </ul>
 		</section>
 	</main>
 
@@ -135,6 +127,16 @@
 			</small>
 		</li>
 	</template>
+  <template class="calendar-event">
+    <li class="list-unstyled calendar-event-item">
+      <span class="attending">👍</span>
+      <span class="notAttending">👎</span>
+      <span class="notConfirmed">❓</span>
+      <p class="fs-3 d-inline text-danger event-start-time">8h</p>
+      <p class="fs-6 ms-1 d-inline text-danger">(<span class="event-duration"></span>)</p>
+      <p class="fs-6"><span class="event-summary"></span><a class="btn btn-info ms-2 mt-0 mb-0 event-hangout" target="_blank" href="">💬</a></p>
+    </li>
+  </template>
 </body>
 
 </html>
