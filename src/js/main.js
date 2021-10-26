@@ -1,6 +1,7 @@
 /* global chrome, google */
 document.addEventListener('DOMContentLoaded', () => {
   let fullData
+  let userEmail
   const modalBody = document.querySelector('.modal-body')
   let city = ''
 
@@ -26,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const fetchResources = () => {
-    console.log('>>>', userPrefs)
     const rssFetch = new Request('https://resourcery.vercel.app/feed.json')
     // const headers = new Headers()
     const options = {
@@ -136,12 +136,17 @@ document.addEventListener('DOMContentLoaded', () => {
       case 'user_profile':
         break
       case 'user_info': {
+        userEmail = objData.emailAddresses[0].value
         const nameField = document.querySelector('.userName')
         nameField.innerText = upperCaseNameFirstLetters(objData.names[0].displayName)
         break
       }
       case 'user_calendar_events': {
         buildCalendarEvents(objData)
+        break
+      }
+      case 'user_calendar_list': {
+        console.log('user calendar list', objData)
         break
       }
     }
@@ -151,50 +156,74 @@ document.addEventListener('DOMContentLoaded', () => {
   const buildCalendarEvents = (objData) => {
     const calendarList = document.querySelector('.calendar-list')
     const calendarEvent = document.querySelector('.calendar-event')
-    const etags = []
+    const eventList = filterEventList(objData)
 
-    objData.items.forEach((event) => {
-      const eventStart = event.originalStartTime?.dateTime || event.start?.dateTime
-      if (event.summary && eventStart && !etags.includes(event.etag)) {
-        console.log(event)
-        etags.push(event.etag);
-        const clonedEvent = calendarEvent.content.cloneNode(true)
-        clonedEvent.querySelector('.event-summary').innerText = event.summary
-        if (event.hangoutLink) {
-          clonedEvent.querySelector('.event-hangout').setAttribute('href', event.hangoutLink)
-        } else {
-          clonedEvent.querySelector('.event-hangout').classList.add('d-none')
-        }
-        clonedEvent.querySelector('.event-start-time').innerText = getPrettyHourMinute(eventStart);
-        const eventEnd = event.end?.dateTime
-        clonedEvent.querySelector('.event-duration').innerText = `${getDateDiff(eventStart, eventEnd)}min`
-        if (event.status === 'confirmed') {
-          console.log('!!!', clonedEvent)
-          clonedEvent.querySelector('.calendar-event-item').classList.add('statusConfirmed');
-        }
-        calendarList.append(clonedEvent)
+    eventList.forEach((event) => {
+      //console.log('>>>', event)
+      const clonedEvent = calendarEvent.content.cloneNode(true)
+      clonedEvent.querySelector('.event-summary').innerText = event.summary
+      if (event.hangoutLink) {
+        clonedEvent.querySelector('.event-hangout').setAttribute('href', event.hangoutLink)
+        clonedEvent.querySelector('.event-hangout').classList.remove('d-none')
       }
+      clonedEvent.querySelector('.event-start-time').innerText = event.eventStartPretty
+      clonedEvent.querySelector('.event-duration').innerText = event.eventDuration
+      if (event.attendees) {
+        const attendeeStatus = getAtendeeResponseStatus(event.attendees)
+        clonedEvent.querySelector('.calendar-event-item').classList.add(attendeeStatus)
+      }
+      calendarList.append(clonedEvent)
     })
   }
 
-  const getFormattedDate = (strDate) => {
-    return new Date(strDate);
-  }
+  // const getFormattedDate = (strDate) => {
+  //   return new Date(strDate)
+  // }
 
   const getPrettyHourMinute = (strDate) => {
-    const tmpDate = new Date(strDate);
+    const tmpDate = new Date(strDate)
     let prettyTime = `${tmpDate.getHours()}h`
     if (tmpDate.getMinutes()) {
       prettyTime = `${prettyTime}${tmpDate.getMinutes()}m`
     }
-    return prettyTime;
+    return prettyTime
   }
 
   const getDateDiff = (eventStart, eventEnd) => {
-    const startDate = new Date(eventStart);
-    const endDate = new Date(eventEnd);
+    const startDate = new Date(eventStart)
+    const endDate = new Date(eventEnd)
     const diffDate = (endDate.getTime() - startDate.getTime()) / 60000
     return diffDate
+  }
+
+  const getAtendeeResponseStatus = (attendees) => {
+    let attendeeStatus
+    attendees.forEach((attendee) => {
+      if (attendee.email === userEmail) {
+        attendeeStatus = attendee.responseStatus
+      }
+    })
+    return attendeeStatus
+  }
+
+  const filterEventList = (objData) => {
+    const filteredData = []
+    objData.items.forEach((event) => {
+      const eventStart = event.originalStartTime?.dateTime || event.start?.dateTime
+      // FIX this indexof is used to avoid event duplication, but I'm not really confident this is the best way
+      if (event.summary && eventStart && event.id.indexOf('_') === -1) {
+        event.eventStartPretty = getPrettyHourMinute(eventStart)
+        const eventEnd = event.end?.dateTime
+        event.eventDuration = `${getDateDiff(eventStart, eventEnd)}min`
+        filteredData.push(event)
+      }
+    })
+
+    filteredData.sort((a, b) => {
+      return new Date(b.originalStartTime?.dateTime || b.start?.dateTime) - new Date(a.originalStartTime?.dateTime || a.start?.dateTime)
+    })
+
+    return filteredData
   }
 
   const upperCaseNameFirstLetters = (name) => {

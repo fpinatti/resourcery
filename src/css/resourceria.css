@@ -126,19 +126,19 @@ img {
 	--primary-color: var(--provider-6-primary);
 }
 
-.attending,
-.notAttending,
-.notConfirmed {
+.calendar-attendee-status .needsAction,
+.calendar-attendee-status .declined,
+.calendar-attendee-status .accepted {
   display: none;
   vertical-align: super;
 }
 /* TODO: fix those classes to display attend icons */
-/* .calendar-event-item.statusConfirmed .notAttending {
+.calendar-event-item.accepted .accepted {
   display: block;
-} */
-/* .calendar-event-item.statusConfirmed .notConfirmed {
+}
+.calendar-event-item.declined .declined {
   display: block;
-} */
-.calendar-event-item.statusConfirmed .attending {
-  display: inline-block;
+}
+.calendar-event-item.needsAction .needsAction {
+  display: block;
 }
