@@ -142,3 +142,8 @@ img {
 .calendar-event-item.needsAction .needsAction {
   display: block;
 }
+
+.userstatus-auth,
+.userstatus-unauth {
+  display: none;
+}

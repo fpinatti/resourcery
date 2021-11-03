@@ -14,6 +14,10 @@
 		rel="stylesheet"
 		href="css/bootstrap.min.css"
 	>
+  <link
+		rel="stylesheet"
+		href="css/fontawesome-all.css"
+	>
 	<link
 		rel="stylesheet"
 		href="css/main.css"
@@ -60,18 +64,27 @@
 	</header>
 	<main id="content">
 		<section class="greetings shadow">
-			<p class="fs-2"><span class="greet"></span>
-				<span
-					class="userName"
-				/>
-			</p>
-			<div class="weather-wrapper d-none">
-				Weather in <span class="city-name"></span> is <span class="city-temp"></span>º,
-				<span class="city-sky"></span>
-				<img
-					class="ms-2 icon-weather"
-				/>
-			</div>
+      <div class="container-fluid">
+        <div class="row">
+          <p class="fs-2 col-10">
+            <span class="greet"></span>
+            <span
+              class="userName"
+            />
+          </p>
+          <div class="col-2 d-flex justify-content-end">
+            <button id="unauthButton" class="btn btn-danger userstatus-auth">Sign out <i class="fab fa-google-plus-g"></i></button>
+            <button id="oauthButton" class="btn btn-danger userstatus-unauth">Sign in with <i class="fab fa-google-plus-g"></i></button>
+          </div>
+        </div>
+        <div class="weather-wrapper d-none">
+          Weather in <span class="city-name"></span> is <span class="city-temp"></span>º,
+          <span class="city-sky"></span>
+          <img
+            class="ms-2 icon-weather"
+          />
+        </div>
+      </div>
 		</section>
 		<section class="posts shadow">
 			<h2>Resources</h2>
@@ -80,9 +93,9 @@
 			</ul>
 		</section>
 		<section class="calendar shadow">
-			<button id="oauthButton">
+			<!-- <button id="oauthButton">
 				Sign in with Google
-			</button>
+			</button> -->
 			<h1 class="align-items-center d-flex fs-3">
 				<small class="fs-4">📆</small>
 				My day:

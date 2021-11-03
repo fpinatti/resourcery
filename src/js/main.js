@@ -1,4 +1,4 @@
-/* global chrome, google */
+/* global chrome */
 document.addEventListener('DOMContentLoaded', () => {
   let fullData
   let userEmail
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const addListeners = () => {
     // calendarField.addEventListener('change', onCalendarChange)
-    document.querySelector('button#oauthButton').addEventListener('click', function () {
+    document.querySelector('#oauthButton').addEventListener('click', function () {
       chrome.runtime.sendMessage({
         message: 'get_auth_token'
       })
@@ -124,6 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
         message: 'get_calendar_by_id'
       })
     })
+
+    document.querySelector('#unauthButton').addEventListener('click', function () {
+      console.log('unauth')
+      chrome.runtime.sendMessage({
+        message: 'sign_out'
+      })
+    })
+
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       if (request.action === 'chrome-message') {
         onGetChromeMessage(request.message, request.data)
@@ -134,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const onGetChromeMessage = (message, objData) => {
     switch (message) {
       case 'user_profile':
+        onUserProfile(objData)
         break
       case 'user_info': {
         userEmail = objData.emailAddresses[0].value
@@ -159,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventList = filterEventList(objData)
 
     eventList.forEach((event) => {
-      //console.log('>>>', event)
+      // console.log('>>>', event)
       const clonedEvent = calendarEvent.content.cloneNode(true)
       clonedEvent.querySelector('.event-summary').innerText = event.summary
       if (event.hangoutLink) {
@@ -243,46 +252,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  const getUserPrefs = () => {
-    return chrome.storage.sync.get({
-      role: ''
-    }, function (items) {
-      return items
+  const checkUserProfile = () => {
+    chrome.runtime.sendMessage({
+      message: 'get_profile'
     })
   }
 
-  const getCalendar = () => {
+  const onUserProfile = (objData) => {
+    const isAuth = objData.id
+    const statusClass = (isAuth) ? '.userstatus-auth' : '.userstatus-unauth'
+    const statusElements = document.querySelectorAll(statusClass)
+    statusElements.forEach((element) => {
+      element.classList.add('d-block')
+    })
 
-    // return calendar list
-    // need scope https://www.googleapis.com/auth/calendar.readonly
-    // GET https://www.googleapis.com/calendar/v3/users/me/calendarList
-
-    // get calendar with id
-    // GET https://www.googleapis.com/calendar/v3/calendars/calendarId
+    if (isAuth) {
+      getAuthInfo()
+    }
   }
+
+  const getAuthInfo = () => {
+    chrome.runtime.sendMessage({
+      message: 'get_user_information'
+    })
+    chrome.runtime.sendMessage({
+      message: 'get_calendar_list'
+    })
+    chrome.runtime.sendMessage({
+      message: 'get_calendar_by_id'
+    })
+  }
+
+  // const getUserPrefs = () => {
+  //   return chrome.storage.sync.get({
+  //     role: ''
+  //   }, function (items) {
+  //     return items
+  //   })
+  // }
+
+  // const getCalendar = () => {
+
+  // return calendar list
+  // need scope https://www.googleapis.com/auth/calendar.readonly
+  // GET https://www.googleapis.com/calendar/v3/users/me/calendarList
+
+  // get calendar with id
+  // GET https://www.googleapis.com/calendar/v3/calendars/calendarId
+  // }
 
   // https://developers.google.com/identity/sign-in/web/sign-in
-  const getBasicProfile = (googleUser) => {
-    const profile = googleUser.getBasicProfile()
-    console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName())
-    console.log('Image URL: ' + profile.getImageUrl())
-    console.log('Email: ' + profile.getEmail()) // This is null if the 'email' scope is not present.
-  }
+  // const getBasicProfile = (googleUser) => {
+  //   const profile = googleUser.getBasicProfile()
+  //   console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
+  //   console.log('Name: ' + profile.getName())
+  //   console.log('Image URL: ' + profile.getImageUrl())
+  //   console.log('Email: ' + profile.getEmail()) // This is null if the 'email' scope is not present.
+  // }
 
-  const handleCredentialResponse = () => {
-    console.log('111')
-  }
-  window.onload = function () {
-    google.accounts.id.initialize({
-      client_id: '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
-      callback: handleCredentialResponse
-    })
-    // google.accounts.id.prompt();
-  }
+  // const handleCredentialResponse = () => {
+  //   console.log('111')
+  // }
+  // window.onload = function () {
+  //   google.accounts.id.initialize({
+  //     client_id: '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
+  //     callback: handleCredentialResponse
+  //   })
+  //   // google.accounts.id.prompt();
+  // }
 
   // https://developer.chrome.com/docs/apps/app_identity/
-  const userPrefs = getUserPrefs()
+  // const userPrefs = getUserPrefs()
   fetchResources()
   getLocation()
     .then(() => {
@@ -291,6 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   initModal()
   addListeners()
+  checkUserProfile()
 
   // getCalendar()
 })

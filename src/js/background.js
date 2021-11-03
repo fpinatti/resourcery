@@ -2,10 +2,18 @@
 
 const API_KEY = 'AIzaSyCACn68SfWwozQbzOXYPqCskkN-XKlgNug'
 
-const getAuthToken = () => {
+const getAuthToken = async () => {
   chrome.identity.getAuthToken({ interactive: true }, function (token) {
+    return token;
     console.log(`Token: ${token}`)
   })
+}
+
+const signOut = async () => {
+  console.log('AAA')
+  const token = await getAuthToken();
+  console.log('BBB', token);
+  // chrome.identity.removeCachedAuthToken()
 }
 
 const getUserProfile = () => {
@@ -140,5 +148,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   else if (request.message === 'get_contacts') getUserContacts()
   else if (request.message === 'get_calendar_list') getCalendarList()
   else if (request.message === 'get_calendar_by_id') getCalendarEvents()
+  else if (request.message === 'sign_out') signOut()
   else defaultCallback()
 })
