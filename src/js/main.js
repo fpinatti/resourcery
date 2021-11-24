@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fetchResources = () => {
     const rssFetch = new Request('https://resourcery.vercel.app/feed.json')
-    // const headers = new Headers()
     const options = {
       method: 'GET'
     }
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getLocation = () => {
     const location = new Request('https://geolocation-db.com/json/59e89620-db25-11eb-ad48-73c00c9b92a3')
-    // const headers = new Headers()
     const options = {
       method: 'GET'
     }
@@ -106,29 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const addListeners = () => {
-    // calendarField.addEventListener('change', onCalendarChange)
     document.querySelector('#oauthButton').addEventListener('click', function () {
       chrome.runtime.sendMessage({
         message: 'get_auth_token'
       })
-      chrome.runtime.sendMessage({
-        message: 'get_profile'
-      })
-      chrome.runtime.sendMessage({
-        message: 'get_user_information'
-      })
-      chrome.runtime.sendMessage({
-        message: 'get_calendar_list'
-      })
-      chrome.runtime.sendMessage({
-        message: 'get_calendar_by_id'
-      })
     })
 
     document.querySelector('#unauthButton').addEventListener('click', function () {
-      console.log('unauth')
-      chrome.runtime.sendMessage({
-        message: 'sign_out'
+      chrome.identity.clearAllCachedAuthTokens(() => {
+        isUserAuth()
       })
     })
 
@@ -141,8 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const onGetChromeMessage = (message, objData) => {
     switch (message) {
+      case 'user_token':
+        onUserToken(objData)
+        break
       case 'user_profile':
-        onUserProfile(objData)
+        // onUserProfile(objData)
         break
       case 'user_info': {
         userEmail = objData.emailAddresses[0].value
@@ -159,7 +146,23 @@ document.addEventListener('DOMContentLoaded', () => {
         break
       }
     }
-    // console.log(message, objData)
+  }
+
+  const onUserToken = (token) => {
+    console.log('USER TOKEN IS', token)
+    isUserAuth()
+    chrome.runtime.sendMessage({
+      message: 'get_profile'
+    })
+    chrome.runtime.sendMessage({
+      message: 'get_user_information'
+    })
+    chrome.runtime.sendMessage({
+      message: 'get_calendar_list'
+    })
+    chrome.runtime.sendMessage({
+      message: 'get_calendar_by_id'
+    })
   }
 
   const buildCalendarEvents = (objData) => {
@@ -168,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventList = filterEventList(objData)
 
     eventList.forEach((event) => {
-      // console.log('>>>', event)
       const clonedEvent = calendarEvent.content.cloneNode(true)
       clonedEvent.querySelector('.event-summary').innerText = event.summary
       if (event.hangoutLink) {
@@ -184,10 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
       calendarList.append(clonedEvent)
     })
   }
-
-  // const getFormattedDate = (strDate) => {
-  //   return new Date(strDate)
-  // }
 
   const getPrettyHourMinute = (strDate) => {
     const tmpDate = new Date(strDate)
@@ -258,17 +256,39 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const onUserProfile = (objData) => {
-    const isAuth = objData.id
-    const statusClass = (isAuth) ? '.userstatus-auth' : '.userstatus-unauth'
-    const statusElements = document.querySelectorAll(statusClass)
-    statusElements.forEach((element) => {
-      element.classList.add('d-block')
-    })
-
-    if (isAuth) {
-      getAuthInfo()
+  const isUserAuth = () => {
+    try {
+      chrome.identity.getAuthToken({ interactive: false }, (token) => {
+        const isAuth = token || false
+        resetUIAuthStatus()
+        const statusClass = (isAuth) ? '.userstatus-auth' : '.userstatus-unauth'
+        const statusElements = document.querySelectorAll(statusClass)
+        statusElements.forEach((element) => {
+          element.classList.add('d-block')
+        })
+        if (isAuth) {
+          document.querySelector('body').classList.add('is-auth')
+          getAuthInfo()
+        }
+      })
+    } catch (err) {
+      console.log('ERROR')
     }
+  }
+
+  const resetUIAuthStatus = () => {
+    document.querySelector('.calendar-list').textContent = ''
+    document.querySelector('body').classList.remove('is-auth')
+    const authElements = document.querySelectorAll('.userstatus-auth')
+    const unauthElements = document.querySelectorAll('.userstatus-unauth')
+    authElements.forEach((element) => {
+      element.classList.remove('d-block')
+      element.classList.remove('d-none')
+    })
+    unauthElements.forEach((element) => {
+      element.classList.remove('d-block')
+      element.classList.remove('d-none')
+    })
   }
 
   const getAuthInfo = () => {
@@ -329,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fetchWeather()
       setGreetings()
     })
+  isUserAuth()
   initModal()
   addListeners()
   checkUserProfile()

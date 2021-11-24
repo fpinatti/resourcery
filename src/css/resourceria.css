@@ -47,9 +47,9 @@ img {
 }
 .posts {
 	background-color: var(--bs-light);
-	width: calc(80% - var(--box-margin) * 2);
+	width: 100%;
 	resize: horizontal;
-    overflow: auto;
+  overflow: auto;
 }
 
 .calendar {
@@ -146,4 +146,8 @@ img {
 .userstatus-auth,
 .userstatus-unauth {
   display: none;
+}
+
+.is-auth .posts {
+  width: calc(80% - var(--box-margin) * 2);
 }
