@@ -169,8 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const calendarList = document.querySelector('.calendar-list')
     const calendarEvent = document.querySelector('.calendar-event')
     const eventList = filterEventList(objData)
+    const sortEvents = sortEventsByStartDate(eventList)
 
-    eventList.forEach((event) => {
+    sortEvents.forEach((event) => {
       const clonedEvent = calendarEvent.content.cloneNode(true)
       clonedEvent.querySelector('.event-summary').innerText = event.summary
       if (event.hangoutLink) {
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clonedEvent.querySelector('.event-start-time').innerText = event.eventStartPretty
       clonedEvent.querySelector('.event-duration').innerText = event.eventDuration
       if (event.attendees) {
-        const attendeeStatus = getAtendeeResponseStatus(event.attendees)
+        const attendeeStatus = getAttendeeResponseStatus(event.attendees)
         clonedEvent.querySelector('.calendar-event-item').classList.add(attendeeStatus)
       }
       calendarList.append(clonedEvent)
@@ -203,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return diffDate
   }
 
-  const getAtendeeResponseStatus = (attendees) => {
+  const getAttendeeResponseStatus = (attendees) => {
     let attendeeStatus
     attendees.forEach((attendee) => {
       if (attendee.email === userEmail) {
@@ -231,6 +232,32 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     return filteredData
+  }
+
+  const sortEventsByStartDate = (events) => {
+    const formattedEvents = addMillisecondsPropertyToEvents(events)
+
+    const result = formattedEvents.sort((a, b) => {
+      if (a.startDateInMilliseconds < b.startDateInMilliseconds) return -1
+      if (a.startDateInMilliseconds > b.startDateInMilliseconds) return 1
+
+      return 0
+    })
+
+    return result
+  }
+
+  const addMillisecondsPropertyToEvents = (events) => {
+    events.forEach(event => {
+      // "2021-12-06T12:00:00-03:00"
+      const hour = event.start.dateTime.split('T')[1].split('-')[0]
+      // "12:00:00"
+      const ms = Number(hour.split(':')[0]) * 60 * 60 * 1000 + Number(hour.split(':')[1]) * 60 * 1000
+
+      event.startDateInMilliseconds = ms
+    })
+
+    return events
   }
 
   const upperCaseNameFirstLetters = (name) => {
