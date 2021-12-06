@@ -218,18 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterEventList = (objData) => {
     const filteredData = []
     objData.items.forEach((event) => {
-      const eventStart = event.originalStartTime ? .dateTime || event.start ? .dateTime
+      const eventStart = event.originalStartTime?.dateTime || event.start?.dateTime
       // FIX this indexof is used to avoid event duplication, but I'm not really confident this is the best way
       if (event.summary && eventStart && event.id.indexOf('_') === -1) {
         event.eventStartPretty = getPrettyHourMinute(eventStart)
-        const eventEnd = event.end ? .dateTime
+        const eventEnd = event.end?.dateTime
         event.eventDuration = `${getDateDiff(eventStart, eventEnd)}min`
         filteredData.push(event)
       }
     })
 
     filteredData.sort((a, b) => {
-      return new Date(b.originalStartTime ? .dateTime || b.start ? .dateTime) - new Date(a.originalStartTime ? .dateTime || a.start ? .dateTime)
+      return new Date(b.originalStartTime?.dateTime || b.start?.dateTime) - new Date(a.originalStartTime?.dateTime || a.start?.dateTime)
     })
 
     return filteredData
