@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let userEmail
   const modalBody = document.querySelector('.modal-body')
   let city = ''
+  const userRole = {id: '', name: ''};
 
   const buildPostsList = (postsList) => {
     const listWrapper = document.querySelector('.posts__list')
@@ -336,7 +337,12 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.get({
       role: ''
     }, function (data) {
-      fetchResources(data.role)
+      const arr = data.role.split('||');
+      userRole.id = arr[0];
+      userRole.name = arr[1];
+      fetchResources(userRole.id)
+      const roleTitle = document.querySelector('.role-title');
+      roleTitle.innerText = `(${userRole.name})`;
     })
   }
 
