@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  const fetchResources = () => {
-    const rssFetch = new Request('https://resourcery.vercel.app/feed.json')
+  const fetchResources = (userRole) => {
+    if (!userRole) userRole = 'fe'
+    const rssFetch = new Request(`https://resourcery.vercel.app/feed-${userRole}.json`)
     const options = {
       method: 'GET'
     }
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         onUserToken(objData)
         break
       case 'user_profile':
-        // onUserProfile(objData)
+
         break
       case 'user_info': {
         userEmail = objData.emailAddresses[0].value
@@ -142,14 +143,13 @@ document.addEventListener('DOMContentLoaded', () => {
         break
       }
       case 'user_calendar_list': {
-        console.log('user calendar list', objData)
+
         break
       }
     }
   }
 
   const onUserToken = (token) => {
-    console.log('USER TOKEN IS', token)
     isUserAuth()
     chrome.runtime.sendMessage({
       message: 'get_profile'
@@ -217,18 +217,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const filterEventList = (objData) => {
     const filteredData = []
     objData.items.forEach((event) => {
-      const eventStart = event.originalStartTime?.dateTime || event.start?.dateTime
+      const eventStart = event.originalStartTime ? .dateTime || event.start ? .dateTime
       // FIX this indexof is used to avoid event duplication, but I'm not really confident this is the best way
       if (event.summary && eventStart && event.id.indexOf('_') === -1) {
         event.eventStartPretty = getPrettyHourMinute(eventStart)
-        const eventEnd = event.end?.dateTime
+        const eventEnd = event.end ? .dateTime
         event.eventDuration = `${getDateDiff(eventStart, eventEnd)}min`
         filteredData.push(event)
       }
     })
 
     filteredData.sort((a, b) => {
-      return new Date(b.originalStartTime?.dateTime || b.start?.dateTime) - new Date(a.originalStartTime?.dateTime || a.start?.dateTime)
+      return new Date(b.originalStartTime ? .dateTime || b.start ? .dateTime) - new Date(a.originalStartTime ? .dateTime || a.start ? .dateTime)
     })
 
     return filteredData
@@ -285,7 +285,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const isUserAuth = () => {
     try {
-      chrome.identity.getAuthToken({ interactive: false }, (token) => {
+      chrome.identity.getAuthToken({
+        interactive: false
+      }, (token) => {
         const isAuth = token || false
         resetUIAuthStatus()
         const statusClass = (isAuth) ? '.userstatus-auth' : '.userstatus-unauth'
@@ -299,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       })
     } catch (err) {
-      console.log('ERROR')
+      console.log(err)
     }
   }
 
@@ -330,47 +332,15 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // const getUserPrefs = () => {
-  //   return chrome.storage.sync.get({
-  //     role: ''
-  //   }, function (items) {
-  //     return items
-  //   })
-  // }
+  const getPrefs = () => {
+    chrome.storage.sync.get({
+      role: ''
+    }, function (data) {
+      fetchResources(data.role)
+    })
+  }
 
-  // const getCalendar = () => {
-
-  // return calendar list
-  // need scope https://www.googleapis.com/auth/calendar.readonly
-  // GET https://www.googleapis.com/calendar/v3/users/me/calendarList
-
-  // get calendar with id
-  // GET https://www.googleapis.com/calendar/v3/calendars/calendarId
-  // }
-
-  // https://developers.google.com/identity/sign-in/web/sign-in
-  // const getBasicProfile = (googleUser) => {
-  //   const profile = googleUser.getBasicProfile()
-  //   console.log('ID: ' + profile.getId()) // Do not send to your backend! Use an ID token instead.
-  //   console.log('Name: ' + profile.getName())
-  //   console.log('Image URL: ' + profile.getImageUrl())
-  //   console.log('Email: ' + profile.getEmail()) // This is null if the 'email' scope is not present.
-  // }
-
-  // const handleCredentialResponse = () => {
-  //   console.log('111')
-  // }
-  // window.onload = function () {
-  //   google.accounts.id.initialize({
-  //     client_id: '85500286524-e912nst858563iib207gbhhmcg240fol.apps.googleusercontent.com',
-  //     callback: handleCredentialResponse
-  //   })
-  //   // google.accounts.id.prompt();
-  // }
-
-  // https://developer.chrome.com/docs/apps/app_identity/
-  // const userPrefs = getUserPrefs()
-  fetchResources()
+  getPrefs()
   getLocation()
     .then(() => {
       fetchWeather()
@@ -380,6 +350,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initModal()
   addListeners()
   checkUserProfile()
-
-  // getCalendar()
 })

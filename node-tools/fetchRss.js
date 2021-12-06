@@ -4,8 +4,46 @@ const fs = require('fs')
 const {
   log
 } = require('./utils/logger')
-
-let data = []
+const args = process.argv.slice(2)
+const data = []
+const resourceList = {
+  fe: [{
+      provider_title: 'Smashing Magazine',
+      feedUrl: 'https://www.smashingmagazine.com/categories/javascript/index.xml',
+      provider_url: 'https://www.smashingmagazine.com'
+    },
+    {
+      provider_title: 'Codrops',
+      feedUrl: 'https://tympanus.net/codrops/feed/',
+      provider_url: 'https://tympanus.net/codrops'
+    },
+    {
+      provider_title: 'CSS Tricks',
+      feedUrl: 'https://css-tricks.com/feed/',
+      provider_url: 'https://css-tricks.com'
+    },
+    {
+      provider_title: 'Dev.to',
+      feedUrl: 'https://dev.to/feed',
+      provider_url: 'https://dev.to'
+    },
+    {
+      provider_title: 'Sitepoint',
+      feedUrl: 'https://www.sitepoint.com/feed',
+      provider_url: 'https://www.sitepoint.com'
+    },
+    {
+      provider_title: 'Frontend Focus',
+      feedUrl: 'https://cprss.s3.amazonaws.com/frontendfoc.us.xml',
+      provider_url: 'https://frontendfoc.us/'
+    },
+    {
+      provider_title: 'CSS Weekly',
+      feedUrl: 'http://feeds.feedburner.com/CSS-Weekly?format=xml',
+      provider_url: 'https://css-weekly.com/'
+    },
+  ]
+}
 
 const fetchResources = async (url, info) => {
   log('Fetching...')
@@ -37,11 +75,11 @@ const appendLoadedData = async (jsonData, info) => {
   }
 }
 
-const saveJson = () => {
+const saveJson = (role) => {
   log('Saving feed...')
   const shuffleData = shuffledArr(data)
   const jsonString = JSON.stringify(shuffleData, null, 4);
-  fs.writeFileSync('./public/feed.json', jsonString)
+  fs.writeFileSync(`./public/feed-${role}.json`, jsonString)
 }
 
 const shuffledArr = (array) => {
@@ -51,50 +89,15 @@ const shuffledArr = (array) => {
   })).sort((a, b) => a.sort - b.sort).map(a => a.value)
 }
 
-const initApp = async () => {
-  await fetchResources(
-    'https://www.smashingmagazine.com/categories/javascript/index.xml', {
-      provider_title: 'Smashing Magazine',
-      provider_url: 'https://www.smashingmagazine.com'
-    }
-  )
-  await fetchResources(
-    'https://tympanus.net/codrops/feed/', {
-      provider_title: 'Codrops',
-      provider_url: 'https://tympanus.net/codrops'
-    }
-  )
-  await fetchResources(
-    'https://css-tricks.com/feed/', {
-      provider_title: 'CSS Tricks',
-      provider_url: 'https://css-tricks.com'
-    }
-  )
-  await fetchResources(
-    'https://dev.to/feed', {
-      provider_title: 'Dev.to',
-      provider_url: 'https://dev.to'
-    }
-  )
-  await fetchResources(
-    'https://www.sitepoint.com/feed', {
-      provider_title: 'Sitepoint',
-      provider_url: 'https://www.sitepoint.com'
-    }
-  )
-  await fetchResources(
-    'https://cprss.s3.amazonaws.com/frontendfoc.us.xml', {
-      provider_title: 'Frontend Focus',
-      provider_url: 'https://frontendfoc.us/'
-    }
-  )
-  await fetchResources(
-    'http://feeds.feedburner.com/CSS-Weekly?format=xml', {
-      provider_title: 'CSS Weekly',
-      provider_url: 'https://css-weekly.com/'
-    }
-  )
-  saveJson()
+const initApp = async (role) => {
+  const feedPromises = resourceList[role].map(async feed => {
+    return await fetchResources(feed.feedUrl, feed)
+  })
+
+  // eslint-disable-next-line no-undef
+  await Promise.all(feedPromises)
+  saveJson(role)
 }
 
-initApp()
+
+initApp(args[0])
