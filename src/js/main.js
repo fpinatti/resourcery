@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let userEmail
   const modalBody = document.querySelector('.modal-body')
   let city = ''
-  const userRole = {id: '', name: ''};
+  const userRole = { id: '', name: '' }
 
   const buildPostsList = (postsList) => {
     const listWrapper = document.querySelector('.posts__list')
@@ -145,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         break
       }
       case 'user_calendar_list': {
-
         break
       }
     }
@@ -175,6 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     sortEvents.forEach((event) => {
       const clonedEvent = calendarEvent.content.cloneNode(true)
+      if (event.eventLive) {
+        clonedEvent.querySelector('.calendar-event-item').classList.add('event-live')
+      }
       clonedEvent.querySelector('.event-summary').innerText = event.summary
       if (event.hangoutLink) {
         clonedEvent.querySelector('.event-hangout').setAttribute('href', event.hangoutLink)
@@ -206,6 +208,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return diffDate
   }
 
+  const isEventLive = (eventStart, eventEnd) => {
+    const startDate = new Date(eventStart)
+    const endDate = new Date(eventEnd)
+    const currentDate = new Date()
+    const isLive = currentDate >= startDate &&
+      currentDate <= endDate
+    return isLive
+  }
+
   const getAttendeeResponseStatus = (attendees) => {
     let attendeeStatus
     attendees.forEach((attendee) => {
@@ -225,6 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         event.eventStartPretty = getPrettyHourMinute(eventStart)
         const eventEnd = event.end?.dateTime
         event.eventDuration = `${getDateDiff(eventStart, eventEnd)}min`
+        event.eventLive = isEventLive(eventStart, eventEnd)
         filteredData.push(event)
       }
     })
@@ -337,13 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const getPrefs = () => {
     chrome.storage.sync.get({
       role: ''
-    }, function (data) {
-      const arr = data.role.split('||');
-      userRole.id = arr[0];
-      userRole.name = arr[1];
+    }, (data) => {
+      const arr = data.role.split('||')
+      userRole.id = arr[0]
+      userRole.name = arr[1]
       fetchResources(userRole.id)
-      const roleTitle = document.querySelector('.role-title');
-      roleTitle.innerText = `(${userRole.name})`;
+      const roleTitle = document.querySelector('.role-title')
+      roleTitle.innerText = `(${userRole.name})`
     })
   }
 

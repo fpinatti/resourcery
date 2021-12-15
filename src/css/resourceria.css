@@ -159,3 +159,36 @@ img {
 .is-auth .posts {
   width: calc(80% - var(--box-margin) * 2);
 }
+
+.live-wrapper {
+  display: none;
+}
+
+.event-live .live-wrapper {
+  display: block;
+  color: var(--bs-danger);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.event-live {
+  background-color: #d8d8d8;
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.bullet-live {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  margin-right: 6px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
