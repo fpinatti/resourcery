@@ -38,6 +38,11 @@ const resourceList = {
     provider_url: 'https://frontendfoc.us/'
   },
   {
+    provider_title: 'Speckboy',
+    feedUrl: 'https://speckyboy.com/feed/',
+    provider_url: 'https://speckyboy.com/'
+  },
+  {
     provider_title: 'CSS Weekly',
     feedUrl: 'http://feeds.feedburner.com/CSS-Weekly?format=xml',
     provider_url: 'https://css-weekly.com/'
