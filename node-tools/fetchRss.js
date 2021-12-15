@@ -74,7 +74,7 @@ const resourceList = {
   }]
 }
 
-const fetchResources = async (url, info) => {
+const fetchResources = async (url, info, idx) => {
   log('Fetching...')
   try {
     const rssFetch = url
@@ -87,19 +87,20 @@ const fetchResources = async (url, info) => {
 
     parseString(responseText, function (err, convertedJson) {
       if (err) {
-        console.log(err);
+        console.log(err)
       }
-      appendLoadedData(convertedJson, info)
-    });
+      appendLoadedData(convertedJson, info, idx)
+    })
   } catch (err) {
     log('Error fetching the resource', err)
   }
 }
 
-const appendLoadedData = async (jsonData, info) => {
+const appendLoadedData = async (jsonData, info, idx) => {
   for (const element of jsonData.rss.channel[0].item) {
     element.providerTitle = info.provider_title
     element.providerURL = info.provider_url
+    element.providerIdx = idx
     data.push(element)
   }
 }
@@ -107,7 +108,7 @@ const appendLoadedData = async (jsonData, info) => {
 const saveJson = (role) => {
   log('Saving feed...')
   const shuffleData = shuffledArr(data)
-  const jsonString = JSON.stringify(shuffleData, null, 4);
+  const jsonString = JSON.stringify(shuffleData, null, 4)
   fs.writeFileSync(`./public/feed-${role}.json`, jsonString)
 }
 
@@ -119,14 +120,14 @@ const shuffledArr = (array) => {
 }
 
 const initApp = async (role) => {
+  let idx = 0
   const feedPromises = resourceList[role].map(async feed => {
-    return await fetchResources(feed.feedUrl, feed)
+    return await fetchResources(feed.feedUrl, feed, idx++)
   })
 
   // eslint-disable-next-line no-undef
   await Promise.all(feedPromises)
   saveJson(role)
 }
-
 
 initApp(args[0])
