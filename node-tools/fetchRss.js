@@ -97,11 +97,15 @@ const fetchResources = async (url, info, idx) => {
 }
 
 const appendLoadedData = async (jsonData, info, idx) => {
-  for (const element of jsonData.rss.channel[0].item) {
-    element.providerTitle = info.provider_title
-    element.providerURL = info.provider_url
-    element.providerIdx = idx
-    data.push(element)
+  try {
+    for (const element of jsonData.rss.channel[0].item) {
+      element.providerTitle = info.provider_title
+      element.providerURL = info.provider_url
+      element.providerIdx = idx
+      data.push(element)
+    }
+  } catch (err) {
+    console.log('Error reading feed', err);
   }
 }
 

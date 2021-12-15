@@ -6,6 +6,8 @@
 	--provider-4-primary:#0851b1;
 	--provider-5-primary:#d10046;
 	--provider-6-primary:#04a4aa;
+  --provider-7-primary:#640b97;
+  --provider-8-primary:#d81db9;
 }
 html, body {
 	height: 100%;
@@ -107,23 +109,29 @@ img {
     background-color: var(--primary-color);
 }
 
-.posts__list-item[data-provider="Smashing Magazine"] {
+.posts__list-item[data-idx="0"] {
 	--primary-color: var(--provider-1-primary);
 }
-.posts__list-item[data-provider="CSS Tricks"] {
+.posts__list-item[data-idx="1"] {
 	--primary-color: var(--provider-2-primary);
 }
-.posts__list-item[data-provider="Sitepoint"] {
+.posts__list-item[data-idx="2"] {
 	--primary-color: var(--provider-3-primary);
 }
-.posts__list-item[data-provider="Codrops"] {
+.posts__list-item[data-idx="3"] {
 	--primary-color: var(--provider-4-primary);
 }
-.posts__list-item[data-provider="Dev.to"] {
+.posts__list-item[data-idx="4"] {
 	--primary-color: var(--provider-5-primary);
 }
-.posts__list-item[data-provider="CSS Weekly"] {
+.posts__list-item[data-idx="5"] {
 	--primary-color: var(--provider-6-primary);
+}
+.posts__list-item[data-idx="6"] {
+	--primary-color: var(--provider-7-primary);
+}
+.posts__list-item[data-idx="7"] {
+	--primary-color: var(--provider-8-primary);
 }
 
 .calendar-attendee-status .needsAction,

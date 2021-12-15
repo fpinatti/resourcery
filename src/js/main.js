@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clonedItem.querySelector('.post__provider').innerText = item.providerTitle
       clonedItem.querySelector('.post__provider').setAttribute('href', item.providerURL)
       clonedItem.querySelector('.posts__list-item').setAttribute('data-provider', item.providerTitle)
+      clonedItem.querySelector('.posts__list-item').setAttribute('data-idx', item.providerIdx)
       clonedItem.querySelector('.post__description').innerHTML = `${String(item.description).substring(0, 130)}...`
       clonedItem.querySelector('.post__link').setAttribute('href', item.link)
       clonedItem.querySelector('.btn-modal').setAttribute('data-idx', idx)
