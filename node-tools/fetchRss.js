@@ -76,6 +76,71 @@ const resourceList = {
     provider_title: 'Test Guild',
     feedUrl: 'https://testguild.com/feed/',
     provider_url: 'https://testguild.com/'
+  }],
+  data: [{
+    provider_title: 'Outlace',
+    feedUrl: 'http://outlace.com/feeds/all.atom.xml',
+    provider_url: 'http://outlace.com'
+  },
+  {
+    provider_title: 'Rinzewind',
+    feedUrl: 'https://rinzewind.org/blog-en/feeds/all.rss.xml',
+    provider_url: 'https://rinzewind.org/blog-en/'
+  },
+  {
+    provider_title: 'Data Science degree',
+    feedUrl: 'https://datasciencedegree.wisconsin.edu/feed/',
+    provider_url: 'https://datasciencedegree.wisconsin.edu/blog/'
+  },
+  {
+    provider_title: 'Towards Data Science',
+    feedUrl: 'https://towardsdatascience.com/feed',
+    provider_url: 'https://towardsdatascience.com/'
+  },
+  {
+    provider_title: 'Learning with Data',
+    feedUrl: 'https://datascienceleadership.substack.com/feed',
+    provider_url: 'https://learningwithdata.com/'
+  },
+  {
+    provider_title: 'Learn Analytics Here',
+    feedUrl: 'https://learnanalyticshere.wordpress.com/comments/feed/',
+    provider_url: 'https://learnanalyticshere.wordpress.com/'
+  },
+  {
+    provider_title: 'Fast Forward Labs',
+    feedUrl: 'https://blog.fastforwardlabs.com/index.xml',
+    provider_url: 'https://blog.fastforwardlabs.com/'
+  },
+  {
+    provider_title: 'Ryan Swanstrom',
+    feedUrl: 'https://ryanswanstrom.com/feed/',
+    provider_url: 'https://ryanswanstrom.com/'
+  },
+  {
+    provider_title: 'Data School',
+    feedUrl: 'https://www.dataschool.io/rss/',
+    provider_url: 'https://www.dataschool.io/'
+  },
+  {
+    provider_title: 'Becoming a data scientist',
+    feedUrl: 'https://www.becomingadatascientist.com/feed/',
+    provider_url: 'http://www.becomingadatascientist.com/'
+  },
+  {
+    provider_title: 'Beautiful Data',
+    feedUrl: 'http://beautifuldata.net/feed/',
+    provider_url: 'http://beautifuldata.net/'
+  }],
+  leader: [{
+    provider_title: 'Great Leadership',
+    feedUrl: 'https://www.greatleadershipbydan.com/feed',
+    provider_url: 'https://www.greatleadershipbydan.com/'
+  },
+  {
+    provider_title: 'Forbes',
+    feedUrl: 'https://www.forbes.com/leadership/feed/',
+    provider_url: 'https://www.forbes.com/leadership/'
   }]
 }
 

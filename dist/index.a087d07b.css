@@ -44,7 +44,7 @@ img {
 	max-width: 100%;
 }
 .greetings {
-	width: calc(70% - var(--box-margin)*2);
+	width: 100%;
 	background-color: var(--bs-light);
 }
 .posts {
@@ -55,13 +55,7 @@ img {
 }
 
 .useful-links {
-  width: calc(30% - var(--box-margin)*2);
-  background-color: var(--bs-light);
-  min-height: 30vh;
-}
 
-.useful-links iframe {
-  height: calc(100% - 40px);
 }
 
 .calendar {
@@ -202,3 +196,5 @@ img {
     opacity: 1;
   }
 }
+
+/*# sourceMappingURL=index.a087d07b.css.map */

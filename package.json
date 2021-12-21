@@ -12,11 +12,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
     "build": "parcel build src/index.html src/settings.html src/js/background.js --no-content-hash && cp -R ./src/manifest.json ./dist",
+    "serve": "parcel serve src/index.html src/settings.html",
     "lint": "eslint src/js/**",
     "lint:fix": "eslint src/js/** --fix"
   },
   "dependencies": {
-    "firebase": "^9.0.2"
+    "firebase": "^9.0.2",
+    "http-server": "^14.0.0"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.0.0",

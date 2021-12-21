@@ -124,6 +124,10 @@ document.addEventListener('DOMContentLoaded', () => {
         onGetChromeMessage(request.message, request.data)
       }
     })
+
+    document.querySelector('.btn-options').addEventListener('click', (evt) => {
+      chrome.runtime.openOptionsPage()
+    })
   }
 
   const onGetChromeMessage = (message, objData) => {
