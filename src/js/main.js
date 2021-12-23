@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(console.error)
   }
 
-  const getLocation = () => {
+  const getLocation = async () => {
     const location = new Request('https://geolocation-db.com/json/59e89620-db25-11eb-ad48-73c00c9b92a3')
     const options = {
       method: 'GET'
@@ -366,14 +366,16 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  getPrefs()
-  getLocation()
-    .then(() => {
-      fetchWeather()
-      setGreetings()
-    })
-  isUserAuth()
-  initModal()
-  addListeners()
-  checkUserProfile()
+  const init = async () => {
+    getPrefs()
+    await getLocation()
+    fetchWeather()
+    setGreetings()
+    isUserAuth()
+    initModal()
+    addListeners()
+    checkUserProfile()
+  }
+
+  init();
 })
