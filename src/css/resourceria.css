@@ -29,7 +29,7 @@ a {
 	max-width: 95% !important;
 }
 section {
-	margin: var(--box-margin);
+	/* margin: var(--box-margin); */
 	padding: 8px;
 	border-radius: 8px;
 	box-sizing: border-box;
@@ -54,7 +54,7 @@ img {
 
 .useful-links {
   background-color: var(--bs-light);
-  height: calc(100% - 20px);
+  /* height: calc(100% - 20px); */
 }
 
 .useful-links iframe {
@@ -185,6 +185,23 @@ img {
   animation-duration: 1s;
   animation-iteration-count: infinite;
   margin-right: 6px;
+}
+
+.is-auth .calendar-wrapper {
+  flex-basis: 320px;
+}
+
+.doing-auth #oauthButton,
+.doing-auth #unauthButton {
+  display: none !important; /* override BS */
+}
+
+.doing-auth .auth-preloader {
+  display: block;
+}
+
+.auth-preloader {
+  display: none;
 }
 
 @keyframes blink {

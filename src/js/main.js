@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const addListeners = () => {
     document.querySelector('#oauthButton').addEventListener('click', function () {
+      document.querySelector('body').classList.add('doing-auth')
       chrome.runtime.sendMessage({
         message: 'get_auth_token'
       })
     })
 
     document.querySelector('#unauthButton').addEventListener('click', function () {
+      document.querySelector('body').classList.add('doing-auth')
       chrome.identity.clearAllCachedAuthTokens(() => {
         isUserAuth()
       })
@@ -326,8 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetUIAuthStatus = () => {
     document.querySelector('.calendar-list').textContent = ''
     document.querySelector('body').classList.remove('is-auth')
-    document.querySelector('.main-wrapper').classList.remove('col-10')
-    document.querySelector('.main-wrapper').classList.add('col-12')
+    document.querySelector('body').classList.remove('doing-auth')
     const authElements = document.querySelectorAll('.userstatus-auth')
     const unauthElements = document.querySelectorAll('.userstatus-unauth')
     authElements.forEach((element) => {
