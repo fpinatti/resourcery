@@ -44,34 +44,30 @@ img {
 	max-width: 100%;
 }
 .greetings {
-	width: calc(70% - var(--box-margin)*2);
 	background-color: var(--bs-light);
 }
 .posts {
 	background-color: var(--bs-light);
-	width: 100%;
 	resize: horizontal;
   overflow: auto;
 }
 
 .useful-links {
-  width: calc(30% - var(--box-margin)*2);
   background-color: var(--bs-light);
-  min-height: 30vh;
+  height: calc(100% - 20px);
 }
 
 .useful-links iframe {
-  height: calc(100% - 40px);
+  height: 100%;
 }
 
 .calendar {
 	background-color: var(--bs-light);
-	width: calc(20% - var(--box-margin) * 2);
 }
 
 .posts__list {
 	display: flex;
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 	padding: 0;
 }
 .posts__list-item {
@@ -164,10 +160,6 @@ img {
 .userstatus-auth,
 .userstatus-unauth {
   display: none;
-}
-
-.is-auth .posts {
-  width: calc(80% - var(--box-margin) * 2);
 }
 
 .live-wrapper {

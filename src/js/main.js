@@ -326,6 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const resetUIAuthStatus = () => {
     document.querySelector('.calendar-list').textContent = ''
     document.querySelector('body').classList.remove('is-auth')
+    document.querySelector('.main-wrapper').classList.remove('col-10')
+    document.querySelector('.main-wrapper').classList.add('col-12')
     const authElements = document.querySelectorAll('.userstatus-auth')
     const unauthElements = document.querySelectorAll('.userstatus-unauth')
     authElements.forEach((element) => {
