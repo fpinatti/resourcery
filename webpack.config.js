@@ -3,12 +3,11 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const config = {
-  entry: './src/index.js',
-  mode: "development",
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+  entry: {
+    app: './src/index.js',
+    settings: './src/index-settings.js',
   },
+  mode: "development",
   module: {
     rules: [
       {
@@ -33,7 +32,8 @@ const config = {
       patterns: [
         { from: 'src/index.html' },
         { from: 'src/manifest.json' },
-        { from: 'src/settings.html' }
+        { from: 'src/settings.html' },
+        { from: 'src/static' }
       ],
     })
   ]
