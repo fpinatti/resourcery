@@ -1,0 +1,25 @@
+'use strict';
+
+
+(function() {
+  const template = `
+  <section class="useful-links shadow">
+            <div class="container-fluid">
+              <div class="row">
+                <h4>Gemini Bookmarks</h4>
+                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRGOB3AmPZLP9ZokDa8tibYbv1EOx-t2N5ZqUe_2gS5AD0TyQUmb9vnbvVpBtgZqhVe6Vlu0vTrU8lE/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+              </div>
+            </div>
+          </section>`
+  class Links extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.innerHTML = template;
+    }
+  }
+
+  customElements.define('links-area', Links);
+})();
