@@ -1,0 +1,36 @@
+{
+	"manifest_version": 2,
+	"short_name": "Resourceria",
+	"name": "Resourceria",
+	"version": "0.0.2",
+	"key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoTtfOXuRYUx2ESTirXTXQgt8Sh2omr97ZNUkibsIOycUa/3Q2SpFTcVtzsuomDVnejb0wGk8hFz3Vkz8ZztDmMiz8UgyzfIUhMbwKPzN/0hrAEz1xjHrBW5qvJT19lb/gBy1fHVyuJNx7h4EgdZjc3Xz4/YOIggQeodrj8wleCx+mMRDnVlMrbsE6XZSWpuQjn2yrOjVJM/fUjjK6S1TdT+NfXH6XvIo6G4hXDZZUo9DJyc5RHpbxHFoIQJeUBfbHNw1DlWBJmt1KdH+CkB9/SKzTBiukV6dVJQGIaZQERrdbwPHDQcR1eCkl1PIswvpmoG5WSaxHPiowxMVltwHPwIDAQAB",
+	"content_security_policy": "script-src 'self' https://apis.google.com https://www.gstatic.com https://www.googleapis.com https://securetoken.googleapis.com https://accounts.google.com/gsi/client; object-src 'self'",
+	"permissions": [
+		"identity",
+		"identity.email",
+    "storage"
+	],
+	"options_ui": {
+		"page": "settings.html",
+		"open_in_tab": false
+	},
+	"chrome_url_overrides" : {
+		"newtab": "index.html"
+	},
+	"oauth2": {
+		"client_id": "959485660801-hvk82inei3ups3mj79h0svfp04mcovr6.apps.googleusercontent.com",
+		"scopes": [
+			"profile email",
+			"https://www.googleapis.com/auth/contacts",
+			"https://www.googleapis.com/auth/calendar",
+			"https://www.googleapis.com/auth/calendar.readonly",
+			"https://www.googleapis.com/auth/calendar.events.readonly",
+			"https://www.googleapis.com/auth/calendar.events"
+		]
+	},
+	"background": {
+		"scripts": [
+			"./js/background.js"
+		]
+	}
+}
