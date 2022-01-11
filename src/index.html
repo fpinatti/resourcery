@@ -6,26 +6,6 @@
 
 <head>
 	<meta charset="utf-8">
-	<link
-		rel="stylesheet"
-		href="css/normalize.css"
-	>
-	<link
-		rel="stylesheet"
-		href="css/bootstrap.min.css"
-	>
-  <link
-		rel="stylesheet"
-		href="css/fontawesome-all.css"
-	>
-	<link
-		rel="stylesheet"
-		href="css/main.css"
-	>
-	<link
-		rel="stylesheet"
-		href="css/resourceria.css"
-	>
 	<meta
 		name="theme-color"
 		content="#fafafa"
@@ -33,108 +13,38 @@
 </head>
 
 <body>
-
-	<div
-		class="modal"
-		id="contentModal"
-		tabindex="-1"
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button
-						type="button"
-						class="btn-close"
-						data-bs-dismiss="modal"
-						aria-label="Close"
-					></button>
-				</div>
-				<div class="modal-body">
-
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<custom-modal></custom-modal>
 	<header>
 		<img
 			src="img/logo.svg"
 			class="top-logo"
 		/>
 	</header>
+		
 	<main id="content" class="flex-nowrap d-flex">
     <div class="main-wrapper container-fluid">
       <div class="row header-height mb-4">
         <div class="col-7">
-          <section class="greetings shadow">
-            <div class="container-fluid">
-              <div class="row">
-                <p class="fs-2 col-7">
-                  <span class="greet"></span>
-                  <span
-                    class="userName"
-                  />
-                </p>
-                <div class="col-5 d-flex justify-content-end align-items-start">
-                  <div class="auth-preloader spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>
-                  <button id="unauthButton" class="btn btn-danger userstatus-auth">Sign out <i class="fab fa-google-plus-g"></i></button>
-                  <button id="oauthButton" class="btn btn-danger userstatus-unauth">Sign in with <i class="fab fa-google-plus-g"></i></button>
-                  <button class="btn btn-link btn-options">⚙️</button>
-                </div>
-              </div>
-              <div class="weather-wrapper d-none">
-                Weather in <span class="city-name"></span> is <span class="city-temp"></span>º,
-                <span class="city-sky"></span>
-                <img
-                  class="ms-2 icon-weather"
-                />
-              </div>
-            </div>
-          </section>
+			<greetings-area></greetings-area>
+          
         </div>
         <div class="col-5">
-          <section class="useful-links shadow">
-            <div class="container-fluid">
-              <div class="row">
-                <h4>Gemini Bookmarks</h4>
-                <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRGOB3AmPZLP9ZokDa8tibYbv1EOx-t2N5ZqUe_2gS5AD0TyQUmb9vnbvVpBtgZqhVe6Vlu0vTrU8lE/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
-              </div>
-            </div>
-          </section>
+			<links-area></links-area>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <section class="posts shadow">
-            <h2>Resources <span class="role-title"></span></h2>
-            <ul class="posts__list">
-
-            </ul>
-          </section>
+			<resources-area></resources-area>
         </div>
       </div>
     </div>
-    <div class="calendar-wrapper userstatus-auth container-fluid">
-      <section class="calendar shadow userstatus-auth">
-        <h1 class="align-items-center d-flex fs-3">
-          <small class="fs-4">📆</small>
-          My day:
-        </h1>
-        <ul class="calendar-list p-0 d-flex flex-wrap">
-        </ul>
-      </section>
-    </div>
+	<calendar-area></calendar-area>
 
 
 	</main>
 
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/main.js"></script>
 	<template class="post-template">
 		<li class="posts__list-item shadow" data-provider="" data-idx="">
-			<!-- <img src="" class="post__thumb" /> -->
 			<div class="mb-3">
 				<a
 					href=#
@@ -178,6 +88,7 @@
       <p class="fs-6"><span class="event-summary"></span><a class="btn btn-info ms-2 mt-0 mb-0 event-hangout d-none" target="_blank" href="">💬</a></p>
     </li>
   </template>
+  <script src="app.js" type="module"></script>
 </body>
 
 </html>

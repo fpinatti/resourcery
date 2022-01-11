@@ -1,8 +1,10 @@
-/* global chrome, bootstrap */
+import Bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js';
+
+/* global chrome */
 document.addEventListener('DOMContentLoaded', () => {
   const role = document.querySelector('.role-picker')
   const toastMsg = document.querySelector('#liveToast')
-  const toast = new bootstrap.Toast(toastMsg)
+  const toast = new Bootstrap.Toast(toastMsg)
 
   const updateRole = (evt) => {
     const selectValue = evt.target.value
