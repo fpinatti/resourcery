@@ -6,6 +6,7 @@ const config = {
   entry: {
     app: './src/index.js',
     settings: './src/index-settings.js',
+    background: './src/index-background.js',
   },
   mode: "development",
   module: {

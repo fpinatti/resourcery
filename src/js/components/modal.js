@@ -19,7 +19,7 @@
             ></button>
           </div>
           <div class="modal-body">
-  
+
           </div>
         </div>
       </div>
@@ -30,7 +30,6 @@
     }
 
     connectedCallback() {
-      console.log('conn');
       this.innerHTML = template;
     }
   }
