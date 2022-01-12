@@ -1,42 +1,16 @@
 'use strict';
 import { getLocation, upperCaseNameFirstLetters } from '../utils/utils';
+import '../../css/components/greetings.css';
+import html from '../../templates/greetings.html';
 
 (function() {
-  const template = `
-  <section class="greetings shadow">
-  <div class="container-fluid">
-    <div class="row">
-      <p class="fs-2 col-7">
-        <span class="greet"></span>
-        <span
-          class="userName"
-        />
-      </p>
-      <div class="col-5 d-flex justify-content-end align-items-start">
-        <div class="auth-preloader spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-        <button id="unauthButton" class="btn btn-danger userstatus-auth">Sign out <i class="fab fa-google-plus-g"></i></button>
-        <button id="oauthButton" class="btn btn-danger userstatus-unauth">Sign in with <i class="fab fa-google-plus-g"></i></button>
-        <button class="btn btn-link btn-options">⚙️</button>
-      </div>
-    </div>
-    <div class="weather-wrapper d-none">
-      Weather in <span class="city-name"></span> is <span class="city-temp"></span>º,
-      <span class="city-sky"></span>
-      <img
-        class="ms-2 icon-weather"
-      />
-    </div>
-  </div>
-</section>`
   class Greetings extends HTMLElement {
     constructor() {
       super();
     }
 
     connectedCallback() {
-      this.innerHTML = template;
+      this.innerHTML = html;
       this.setGreetings();
       this.addListeners();
       getLocation()

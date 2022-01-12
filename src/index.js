@@ -4,6 +4,7 @@ import './css/bootstrap.min.css';
 import './css/fontawesome-all.css';
 import './css/resourceria.css';
 
+import './js/bootstrap.bundle.min.js';
 import './js/components/messages.js';
 import './js/components/header.js';
 import './js/components/modal.js';

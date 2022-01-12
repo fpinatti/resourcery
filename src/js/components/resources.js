@@ -1,55 +1,16 @@
 'use strict';
 import { fullPostsData } from '../utils/utils';
+import '../../css/components/resources.css';
+import html from '../../templates/resources.html';
 
 (function() {
-  const template = `
-  <section class="posts shadow">
-            <h2>Resources <span class="role-title"></span></h2>
-            <ul class="posts__list">
-
-            </ul>
-          </section>`
-  const postTemplate = `
-  <template class="post-template">
-		<li class="posts__list-item shadow" data-provider="" data-idx="">
-			<div class="mb-3">
-				<a
-					href=#
-					target="_blank"
-					class="post__provider"
-				></a>
-			</div>
-			<div class="post__content">
-				<span class="post__title fs-6 fw-bold"></span>
-				<span class="post__description fs-6"></span>
-			</div>
-			<button
-				type="button"
-				class="btn btn-primary btn-modal"
-				data-idx="0"
-				data-bs-toggle="modal"
-				data-bs-target="#contentModal"
-			>
-				Read more
-			</button>
-			<br />
-			<small>
-				<a
-					href=""
-					target="_self"
-					class="post__link"
-				>original post</a>
-			</small>
-		</li>
-	</template>
-  `
   class Resources extends HTMLElement {
     constructor() {
       super();
     }
 
     connectedCallback() {
-      this.innerHTML = template + postTemplate;
+      this.innerHTML = html;
       this.addListeners();
     }
 
@@ -78,7 +39,6 @@ import { fullPostsData } from '../utils/utils';
       const listWrapper = document.querySelector('.posts__list')
       const rowTemplate = document.querySelector('.post-template')
       fullPostsData = postsList
-      // this.fullData = postsList
 
       postsList.forEach((item, idx) => {
         if (!item['content:encoded']) {

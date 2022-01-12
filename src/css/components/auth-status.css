@@ -1,0 +1,18 @@
+.userstatus-auth,
+.userstatus-unauth {
+  display: none;
+}
+
+.doing-auth #oauthButton,
+.doing-auth #unauthButton {
+  display: none !important; /* override BS */
+}
+
+.doing-auth .auth-preloader {
+  display: block;
+}
+
+.auth-preloader {
+  display: none;
+}
+

@@ -1,32 +1,9 @@
 'use strict';
 import { getPrettyHourMinute, getDateDiff, isEventLive, addMillisecondsPropertyToEvents } from '../utils/utils';
+import '../../css/components/calendar.css';
+import html from '../../templates/calendar.html';
 
 (function() {
-  const template = `
-  <div class="calendar-wrapper userstatus-auth container-fluid">
-      <section class="calendar shadow userstatus-auth">
-        <h1 class="align-items-center d-flex fs-3">
-          <small class="fs-4">📆</small>
-          My day:
-        </h1>
-        <ul class="calendar-list p-0 d-flex flex-wrap">
-        </ul>
-      </section>
-    </div>`
-  const templateCalendarEvent = `
-  <template class="calendar-event">
-    <li class="list-unstyled calendar-event-item w-100">
-      <div class="live-wrapper"><span class="bullet-live">•</span>LIVE</div>
-      <div class="calendar-attendee-status d-inline-block">
-        <span class="accepted">👍</span>
-        <span class="declined">👎</span>
-        <span class="needsAction">❓</span>
-      </div>
-      <p class="fs-3 d-inline text-danger event-start-time">8h</p>
-      <p class="fs-6 ms-1 d-inline text-danger">(<span class="event-duration"></span>)</p>
-      <p class="fs-6"><span class="event-summary"></span><a class="btn btn-info ms-2 mt-0 mb-0 event-hangout d-none" target="_blank" href="">💬</a></p>
-    </li>
-  </template>`
   class Calendar extends HTMLElement {
     constructor() {
       super();
@@ -34,7 +11,7 @@ import { getPrettyHourMinute, getDateDiff, isEventLive, addMillisecondsPropertyT
 
     connectedCallback() {
       this.userEmail = '';
-      this.innerHTML = template + templateCalendarEvent;
+      this.innerHTML = html;
       this.addListeners()
     }
 

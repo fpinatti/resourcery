@@ -1,0 +1,58 @@
+.calendar {
+	background-color: var(--bs-light);
+}
+
+.calendar-attendee-status .needsAction,
+.calendar-attendee-status .declined,
+.calendar-attendee-status .accepted {
+  display: none;
+  vertical-align: super;
+}
+/* TODO: fix those classes to display attend icons */
+.calendar-event-item.accepted .accepted {
+  display: block;
+}
+.calendar-event-item.declined .declined {
+  display: block;
+}
+.calendar-event-item.needsAction .needsAction {
+  display: block;
+}
+
+.live-wrapper {
+  display: none;
+}
+
+.event-live .live-wrapper {
+  display: block;
+  color: var(--bs-danger);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.event-live {
+  background-color: #d8d8d8;
+  padding: 10px;
+  border-radius: 18px;
+  order: -1;
+}
+
+.bullet-live {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  margin-right: 6px;
+}
+
+.is-auth .calendar-wrapper {
+  flex-basis: 320px;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

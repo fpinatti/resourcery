@@ -13,6 +13,25 @@ html, body {
 	height: 100%;
 	background-color: var(--bs-dark);
 }
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px 20px;
+  grid-template-areas:
+    "Header Header Header Header Header Header"
+    "Greetings Greetings Greetings Links Links Calendar"
+    "Resources Resources Resources Resources Resources Calendar";
+}
+
+custom-header { grid-area: Header; }
+greetings-area { grid-area: Greetings; }
+links-area { grid-area: Links; }
+calendar-area { grid-area: Calendar; }
+resources-area { grid-area: Resources; }
+
 a {
 	color: var(--bs-gray);
 }
@@ -29,186 +48,11 @@ a {
 	max-width: 95% !important;
 }
 section {
-	/* margin: var(--box-margin); */
 	padding: 8px;
 	border-radius: 8px;
 	box-sizing: border-box;
 }
-#content {
-	display: flex;
-	min-height: 100%;
-	flex-wrap: wrap;
-}
 
 img {
 	max-width: 100%;
-}
-.greetings {
-	background-color: var(--bs-light);
-}
-.posts {
-	background-color: var(--bs-light);
-	resize: horizontal;
-  overflow: auto;
-}
-
-.useful-links {
-  background-color: var(--bs-light);
-  /* height: calc(100% - 20px); */
-}
-
-.useful-links iframe {
-  height: 100%;
-}
-
-.calendar {
-	background-color: var(--bs-light);
-}
-
-.posts__list {
-	display: flex;
-  flex-wrap: wrap;
-	padding: 0;
-}
-.posts__list-item {
-	flex: 1 0 190px;
-	list-style: none;
-	border-radius: 8px;
-    margin: 6px;
-    padding: 15px;
-	display: flex;
-    flex-wrap: wrap;
-	flex-direction: column;
-}
-.post__content {
-	flex-grow: 2;
-}
-
-.post__thumb {
-	max-width: 100%;
-}
-.post__provider {
-	font-size: 12px;
-	color: var(--primary-color);
-}
-.post__description {
-	display: block;
-}
-
-.btn {
-	border-radius: 30px;
-	border: 0;
-	margin: 10px 0;
-}
-.btn-primary {
-	background-color: var(--primary-color);
-}
-.btn-primary:hover,
-.btn-check:active+.btn-primary,
-.btn-check:checked+.btn-primary,
-.btn-primary.active,
-.btn-primary:active,
-.show>.btn-primary.dropdown-toggle,
-.btn-check:focus+.btn-primary,
-.btn-primary:focus {
-	filter: brightness(.9);
-    background-color: var(--primary-color);
-}
-
-.posts__list-item[data-idx="0"] {
-	--primary-color: var(--provider-1-primary);
-}
-.posts__list-item[data-idx="1"] {
-	--primary-color: var(--provider-2-primary);
-}
-.posts__list-item[data-idx="2"] {
-	--primary-color: var(--provider-3-primary);
-}
-.posts__list-item[data-idx="3"] {
-	--primary-color: var(--provider-4-primary);
-}
-.posts__list-item[data-idx="4"] {
-	--primary-color: var(--provider-5-primary);
-}
-.posts__list-item[data-idx="5"] {
-	--primary-color: var(--provider-6-primary);
-}
-.posts__list-item[data-idx="6"] {
-	--primary-color: var(--provider-7-primary);
-}
-.posts__list-item[data-idx="7"] {
-	--primary-color: var(--provider-8-primary);
-}
-
-.calendar-attendee-status .needsAction,
-.calendar-attendee-status .declined,
-.calendar-attendee-status .accepted {
-  display: none;
-  vertical-align: super;
-}
-/* TODO: fix those classes to display attend icons */
-.calendar-event-item.accepted .accepted {
-  display: block;
-}
-.calendar-event-item.declined .declined {
-  display: block;
-}
-.calendar-event-item.needsAction .needsAction {
-  display: block;
-}
-
-.userstatus-auth,
-.userstatus-unauth {
-  display: none;
-}
-
-.live-wrapper {
-  display: none;
-}
-
-.event-live .live-wrapper {
-  display: block;
-  color: var(--bs-danger);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.event-live {
-  background-color: #d8d8d8;
-  padding: 10px;
-  border-radius: 18px;
-  order: -1;
-}
-
-.bullet-live {
-  animation-name: blink;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  margin-right: 6px;
-}
-
-.is-auth .calendar-wrapper {
-  flex-basis: 320px;
-}
-
-.doing-auth #oauthButton,
-.doing-auth #unauthButton {
-  display: none !important; /* override BS */
-}
-
-.doing-auth .auth-preloader {
-  display: block;
-}
-
-.auth-preloader {
-  display: none;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
 }

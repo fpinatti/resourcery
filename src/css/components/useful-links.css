@@ -1,0 +1,7 @@
+.useful-links {
+  background-color: var(--bs-light);
+}
+
+.useful-links iframe {
+  height: 100%;
+}

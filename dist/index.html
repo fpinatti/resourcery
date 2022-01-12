@@ -16,26 +16,12 @@
 	<custom-modal></custom-modal>
   <browser-messages></browser-messages>
   <user-preferences></user-preferences>
-	<custom-header></custom-header>
-
-	<main id="content" class="flex-nowrap d-flex">
-    <div class="main-wrapper container-fluid">
-      <div class="row header-height mb-4">
-        <div class="col-7">
-			<greetings-area></greetings-area>
-
-        </div>
-        <div class="col-5">
-			<links-area></links-area>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-			<resources-area></resources-area>
-        </div>
-      </div>
-    </div>
-	<calendar-area></calendar-area>
+	<main id="content" class="grid-container p-3">
+    <custom-header></custom-header>
+    <greetings-area></greetings-area>
+    <links-area></links-area>
+    <resources-area></resources-area>
+  	<calendar-area></calendar-area>
 	</main>
   <script src="app.js" type="module"></script>
 </body>

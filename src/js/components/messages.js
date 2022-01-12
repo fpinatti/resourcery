@@ -1,5 +1,5 @@
 'use strict';
-
+import '../../css/components/auth-status.css';
 
 (function() {
   class Messages extends HTMLElement {
