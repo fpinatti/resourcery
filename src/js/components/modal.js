@@ -1,5 +1,5 @@
 'use strict';
-
+import { fullPostsData } from '../utils/utils';
 
 (function() {
   const template = `
@@ -31,6 +31,15 @@
 
     connectedCallback() {
       this.innerHTML = template;
+      this.setup();
+    }
+
+    setup() {
+      const myModal = document.getElementById('contentModal')
+      myModal.addEventListener('show.bs.modal', function (evt) {
+        const element = fullPostsData[evt.relatedTarget.getAttribute('data-idx')]
+        modalBody.innerHTML = element['content:encoded']
+      })
     }
   }
 

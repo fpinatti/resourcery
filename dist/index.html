@@ -14,19 +14,16 @@
 
 <body>
 	<custom-modal></custom-modal>
-	<header>
-		<img
-			src="img/logo.svg"
-			class="top-logo"
-		/>
-	</header>
-		
+  <browser-messages></browser-messages>
+  <user-preferences></user-preferences>
+	<custom-header></custom-header>
+
 	<main id="content" class="flex-nowrap d-flex">
     <div class="main-wrapper container-fluid">
       <div class="row header-height mb-4">
         <div class="col-7">
 			<greetings-area></greetings-area>
-          
+
         </div>
         <div class="col-5">
 			<links-area></links-area>
@@ -39,55 +36,7 @@
       </div>
     </div>
 	<calendar-area></calendar-area>
-
-
 	</main>
-
-	<template class="post-template">
-		<li class="posts__list-item shadow" data-provider="" data-idx="">
-			<div class="mb-3">
-				<a
-					href=#
-					target="_blank"
-					class="post__provider"
-				></a>
-			</div>
-			<div class="post__content">
-				<span class="post__title fs-6 fw-bold"></span>
-				<span class="post__description fs-6"></span>
-			</div>
-			<button
-				type="button"
-				class="btn btn-primary btn-modal"
-				data-idx="0"
-				data-bs-toggle="modal"
-				data-bs-target="#contentModal"
-			>
-				Read more
-			</button>
-			<br />
-			<small>
-				<a
-					href=""
-					target="_self"
-					class="post__link"
-				>original post</a>
-			</small>
-		</li>
-	</template>
-  <template class="calendar-event">
-    <li class="list-unstyled calendar-event-item w-100">
-      <div class="live-wrapper"><span class="bullet-live">•</span>LIVE</div>
-      <div class="calendar-attendee-status d-inline-block">
-        <span class="accepted">👍</span>
-        <span class="declined">👎</span>
-        <span class="needsAction">❓</span>
-      </div>
-      <p class="fs-3 d-inline text-danger event-start-time">8h</p>
-      <p class="fs-6 ms-1 d-inline text-danger">(<span class="event-duration"></span>)</p>
-      <p class="fs-6"><span class="event-summary"></span><a class="btn btn-info ms-2 mt-0 mb-0 event-hangout d-none" target="_blank" href="">💬</a></p>
-    </li>
-  </template>
   <script src="app.js" type="module"></script>
 </body>
 
